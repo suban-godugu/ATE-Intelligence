@@ -1,22 +1,14 @@
-// ATE Intelligence — Full Prisma Schema (Step 2)
-// PostgreSQL via Prisma ORM
-
+// ATE Intelligence — SQLite Schema
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url      = "file:./dev.db"
 }
 
-// Enums converted to String for SQLite compatibility
-// PatternType: SCAN, ATPG, BIST, FUNCTIONAL, IDDQ, BOUNDARY
-// PatternAction: KEEP, REVIEW, REMOVE
-// DetectPower: HIGH, MEDIUM, LOW
-// ChainStatus: HEALTHY, IMBALANCED, BROKEN
-// ChainType: FULL, PARTIAL, EDT
-// FaultModel: STUCK_AT, TRANSITION, PATH_DELAY, BRIDGING, CELL_AWARE, IDDQ, FUNCTIONAL
+// ─── Enums (Simulated in SQLite via String) ───────────────────────────────────
 
 // ─── Lot ──────────────────────────────────────────────────────────────────────
 
@@ -30,7 +22,6 @@ model Lot {
   customer   String?
   device     String?
   status     String? @default("ACTIVE")
-  processNode String?    // Technology node (e.g. 7nm, 5nm)
   endDate    DateTime?
   fileHash   String?    @unique // MD5/SHA of the uploaded bundle
   patterns   Pattern[]
@@ -52,18 +43,18 @@ model Pattern {
   id            String             @id @default(cuid())
   patternId     String
   name          String?
-  type          String
-  domain        String                              // "CPU core", "GPU block"
+  type          String             // SCAN | ATPG | BIST | ...
+  domain        String?                             // "CPU core", "GPU block"
   testTimeMs    Float
   costPerDie    Float
   faultCoverage Float                              // 0–100 %
   failRate      Float                              // 0–100 %
   killRatio     Float              @default(0)     // 0–100 %
-  detectPower   String
-  action        String
+  detectPower   String             // HIGH | MEDIUM | LOW
+  action        String             // KEEP | REVIEW | REMOVE
   sequenceIndex Int                @default(0)
   lotId         String
-  lot           Lot                @relation(fields: [lotId], references: [id])
+  lot           Lot                @relation(fields: [lotId], references: [id], onDelete: Cascade)
   coverages     FaultCoverage[]
   scanPatterns  ScanChainPattern[]
   createdAt     DateTime           @default(now())
@@ -83,7 +74,7 @@ model FaultCoverage {
   id         String     @id @default(cuid())
   patternId  String
   pattern    Pattern    @relation(fields: [patternId], references: [id], onDelete: Cascade)
-  model      String
+  model      String             // STUCK_AT | TRANSITION | ...
   coverage   Float                              // 0–100 %
   detected   Int
   undetected Int
@@ -98,14 +89,14 @@ model FaultCoverage {
 model ScanChain {
   id               String             @id @default(cuid())
   chainId          String
-  length           Int                                  // total cell count
-  domain           String
-  type             String                            // FULL | PARTIAL | EDT
+  length           Int?                                 // total cell count
+  domain           String?
+  type             String?                           // FULL | PARTIAL | EDT
   compressionRatio Int                @default(1)
   balancePercent   Float              @default(100)     // 0–100 %
-  status           String             @default("HEALTHY")
+  status           String        @default("HEALTHY")
   lotId            String
-  lot              Lot                @relation(fields: [lotId], references: [id])
+  lot              Lot                @relation(fields: [lotId], references: [id], onDelete: Cascade)
   patterns         ScanChainPattern[]
   runs             ScanChainRun[]
 
@@ -131,8 +122,9 @@ model WaferRun {
   id         String      @id @default(cuid())
   waferId    String                              // e.g. "W01"
   lotId      String
-  lot        Lot         @relation(fields: [lotId], references: [id])
-  zone       String?                             // "center" | "mid-ring" | "edge"
+  lot        Lot         @relation(fields: [lotId], references: [id], onDelete: Cascade)
+  startTime  DateTime?   @default(now())
+  endTime    DateTime?
   dieResults DieResult[]
 
   @@index([lotId])
@@ -152,7 +144,7 @@ model DieResult {
   failPattern String?                            // patternId that caused fail
   testTimeMs  Float
   binCode     String                             // e.g. "1", "99"
-  zone        String?                            // "center" | "mid-ring" | "edge"
+  zone        String?
   createdAt   DateTime @default(now())
 
   @@index([waferRunId])
@@ -164,13 +156,16 @@ model DieResult {
 // ─── RedundancyGroup ──────────────────────────────────────────────────────────
 
 model RedundancyGroup {
-  id       String   @id @default(cuid())
-  groupId  String                              // e.g. "G-001"
-  patterns String[]                            // array of patternIds
-  overlap  Float                               // overlap % between patterns
-  keepId   String                              // which patternId to keep
-  lotId    String
-  lot      Lot                @relation(fields: [lotId], references: [id], onDelete: Cascade)
+  id             String   @id @default(cuid())
+  groupId        String?                             // e.g. "G-001"
+  name           String?
+  type           String?
+  patterns       String                              // JSON string of patternIds
+  overlap        Float?                              // overlap % between patterns
+  keepId         String?                             // which patternId to keep
+  coverageImpact Float?
+  lotId          String
+  lot            Lot                @relation(fields: [lotId], references: [id], onDelete: Cascade)
 
   @@index([lotId])
 }
@@ -192,7 +187,7 @@ model User {
 model ScanChainRun {
   id               String    @id @default(cuid())
   lotId            String
-  lot              Lot       @relation(fields: [lotId], references: [id])
+  lot              Lot       @relation(fields: [lotId], references: [id], onDelete: Cascade)
   chainId          String
   scanChain        ScanChain @relation(fields: [chainId], references: [id])
   runIndex         Int       // execution order in the test flow
@@ -215,52 +210,57 @@ model ScanChainRun {
 model MBISTRun {
   id                 String   @id @default(cuid())
   lotId              String
-  lot                Lot      @relation(fields: [lotId], references: [id])
-  instanceName       String
-  memoryType         String   // SRAM / ROM / CAM / FIFO / RF
-  domain             String   // CPU core / GPU block / etc.
-  sizeKb             Float    // memory size in KB
-  algorithmUsed      String   // MARCH-C / MARCH-LR / MARCH-SS / MATS+ / GALOIS
-  testTimeMs         Float
-  faultsCaught       Int
-  repairAttempts     Int      // number of repair operations attempted
-  repairSuccess      Int      // number of successful repairs
-  passCount          Int
-  failCount          Int
-  coveragePercent    Float    // memory fault coverage %
-  stuckAtCoverage    Float
-  transitionCoverage Float
-  couplingCoverage   Float
+  lot                Lot      @relation(fields: [lotId], references: [id], onDelete: Cascade)
+  instanceName       String?
+  memoryType         String?   // SRAM / ROM / CAM / FIFO / RF
+  domain             String?   // CPU core / GPU block / etc.
+  sizeKb             Float?    // memory size in KB
+  algorithmUsed      String?   // MARCH-C / MARCH-LR / MARCH-SS / MATS+ / GALOIS
+  testTimeMs         Float?
+  faultsCaught       Int?
+  repairAttempts     Int?      // number of repair operations attempted
+  repairSuccess      Int?      // number of successful repairs
+  passCount          Int?
+  failCount          Int?
+  coveragePercent    Float?    // memory fault coverage %
+  stuckAtCoverage    Float?
+  transitionCoverage Float?
+  couplingCoverage   Float?
+  avgCoverage        Float?
+  totalInstances     Int?
+  status             String?
   createdAt          DateTime @default(now())
 
   @@index([lotId])
-  @@index([instanceName])
 }
 
 model LBISTRun {
   id              String   @id @default(cuid())
-  lotId           String
-  lot             Lot      @relation(fields: [lotId], references: [id])
-  instanceName    String
-  domain          String
-  seedValue       String   // LFSR seed used
-  patternCount    Int      // number of pseudo-random patterns generated
-  testTimeMs      Float
-  signatureMatch  Boolean  // MISR signature matched golden reference
-  faultsCaught    Int
-  passCount       Int
-  failCount       Int
-  coveragePercent Float    // logic fault coverage via PRPG/MISR
-  toggleCoverage  Float    // net toggle coverage %
+  lotId              String
+  lot                Lot      @relation(fields: [lotId], references: [id], onDelete: Cascade)
+  instanceName    String?
+  domain          String?
+  seedValue       String?   // LFSR seed used
+  patternCount    Int?      // number of pseudo-random patterns generated
+  testTimeMs      Float?
+  signatureMatch  Boolean?  // MISR signature matched golden reference
+  faultsCaught    Int?
+  passCount       Int?
+  failCount       Int?
+  coveragePercent Float?    // logic fault coverage via PRPG/MISR
+  toggleCoverage  Float?    // net toggle coverage %
+  avgCoverage     Float?
+  totalInstances  Int?
+  status          String?
   createdAt       DateTime @default(now())
 
   @@index([lotId])
-  @@index([instanceName])
 }
 
 model OptimizationRun {
   id               String   @id @default(cuid())
   lotId            String
+  lot              Lot      @relation(fields: [lotId], references: [id], onDelete: Cascade)
   maxCostPerWafer  Float
   yieldTarget      Float
   maxTestTimeMs    Float
@@ -272,7 +272,6 @@ model OptimizationRun {
   optimizedOrder   String   // JSON string of pattern IDs
   createdBy        String
   createdAt        DateTime @default(now())
-  lot              Lot      @relation(fields: [lotId], references: [id], onDelete: Cascade)
 
   @@index([lotId])
 }
