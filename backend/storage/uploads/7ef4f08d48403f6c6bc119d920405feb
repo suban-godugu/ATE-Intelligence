@@ -1,0 +1,1012 @@
+==============================================================
+                INDUSTRIAL SCAN FAIL LOG REPORT
+==============================================================
+Generated Time : 2026-05-06 06:50:17
+Tester         : Tessent Scan ATPG Environment
+Device         : SOC_SCAN_CORE
+STIL File      : 1000 pattern -1 .stil
+SPF File       : 1000pattern-1.spf
+--------------------------------------------------------------
+
+[FAIL 001]
+  Failed Pattern : PATTERN_0655
+  Failed Chain   : CHAIN_0
+  Failed Flop    : U0/FF0
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 16149
+  Vector         : 7315
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 002]
+  Failed Pattern : PATTERN_0755
+  Failed Chain   : CHAIN_0
+  Failed Flop    : U0/FF8
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 38798
+  Vector         : 13826
+  Failure Type   : SA0
+--------------------------------------------------------------
+[FAIL 003]
+  Failed Pattern : PATTERN_0031
+  Failed Chain   : CHAIN_0
+  Failed Flop    : U0/FF3
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 33218
+  Vector         : 19727
+  Failure Type   : SA0
+--------------------------------------------------------------
+[FAIL 004]
+  Failed Pattern : PATTERN_0575
+  Failed Chain   : CHAIN_1
+  Failed Flop    : U1/FF8
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 14546
+  Vector         : 14720
+  Failure Type   : Shift Error
+--------------------------------------------------------------
+[FAIL 005]
+  Failed Pattern : PATTERN_0829
+  Failed Chain   : CHAIN_0
+  Failed Flop    : U0/FF2
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 22398
+  Vector         : 9106
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 006]
+  Failed Pattern : PATTERN_0221
+  Failed Chain   : CHAIN_2
+  Failed Flop    : U2/FF1
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 24998
+  Vector         : 3170
+  Failure Type   : Shift Error
+--------------------------------------------------------------
+[FAIL 007]
+  Failed Pattern : PATTERN_0868
+  Failed Chain   : CHAIN_2
+  Failed Flop    : U2/FF9
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 2947
+  Vector         : 15055
+  Failure Type   : SA0
+--------------------------------------------------------------
+[FAIL 008]
+  Failed Pattern : PATTERN_0997
+  Failed Chain   : CHAIN_3
+  Failed Flop    : U3/FF1
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 41298
+  Vector         : 11851
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 009]
+  Failed Pattern : PATTERN_0722
+  Failed Chain   : CHAIN_0
+  Failed Flop    : U0/FF0
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 19065
+  Vector         : 2615
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 010]
+  Failed Pattern : PATTERN_0888
+  Failed Chain   : CHAIN_0
+  Failed Flop    : U0/FF6
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 29814
+  Vector         : 11955
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 011]
+  Failed Pattern : PATTERN_0380
+  Failed Chain   : CHAIN_2
+  Failed Flop    : U2/FF3
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 46094
+  Vector         : 2340
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 012]
+  Failed Pattern : PATTERN_0547
+  Failed Chain   : CHAIN_1
+  Failed Flop    : U1/FF2
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 24967
+  Vector         : 8846
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 013]
+  Failed Pattern : PATTERN_0702
+  Failed Chain   : CHAIN_2
+  Failed Flop    : U2/FF0
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 2203
+  Vector         : 10337
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 014]
+  Failed Pattern : PATTERN_0275
+  Failed Chain   : CHAIN_0
+  Failed Flop    : U0/FF3
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 14034
+  Vector         : 16359
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 015]
+  Failed Pattern : PATTERN_0906
+  Failed Chain   : CHAIN_3
+  Failed Flop    : U3/FF2
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 9250
+  Vector         : 8082
+  Failure Type   : Shift Error
+--------------------------------------------------------------
+[FAIL 016]
+  Failed Pattern : PATTERN_0765
+  Failed Chain   : CHAIN_4
+  Failed Flop    : U4/FF6
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 23823
+  Vector         : 7187
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 017]
+  Failed Pattern : PATTERN_0522
+  Failed Chain   : CHAIN_3
+  Failed Flop    : U3/FF1
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 7285
+  Vector         : 5009
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 018]
+  Failed Pattern : PATTERN_0812
+  Failed Chain   : CHAIN_3
+  Failed Flop    : U3/FF9
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 25316
+  Vector         : 12505
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 019]
+  Failed Pattern : PATTERN_0542
+  Failed Chain   : CHAIN_2
+  Failed Flop    : U2/FF8
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 44683
+  Vector         : 3754
+  Failure Type   : Shift Error
+--------------------------------------------------------------
+[FAIL 020]
+  Failed Pattern : PATTERN_0788
+  Failed Chain   : CHAIN_2
+  Failed Flop    : U2/FF1
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 28592
+  Vector         : 5183
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 021]
+  Failed Pattern : PATTERN_0004
+  Failed Chain   : CHAIN_2
+  Failed Flop    : U2/FF8
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 33371
+  Vector         : 3487
+  Failure Type   : Shift Error
+--------------------------------------------------------------
+[FAIL 022]
+  Failed Pattern : PATTERN_0862
+  Failed Chain   : CHAIN_4
+  Failed Flop    : U4/FF9
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 10116
+  Vector         : 12253
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 023]
+  Failed Pattern : PATTERN_0553
+  Failed Chain   : CHAIN_4
+  Failed Flop    : U4/FF0
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 32121
+  Vector         : 639
+  Failure Type   : SA0
+--------------------------------------------------------------
+[FAIL 024]
+  Failed Pattern : PATTERN_0952
+  Failed Chain   : CHAIN_2
+  Failed Flop    : U2/FF4
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 3896
+  Vector         : 7893
+  Failure Type   : SA0
+--------------------------------------------------------------
+[FAIL 025]
+  Failed Pattern : PATTERN_0088
+  Failed Chain   : CHAIN_3
+  Failed Flop    : U3/FF1
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 8514
+  Vector         : 15575
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 026]
+  Failed Pattern : PATTERN_0272
+  Failed Chain   : CHAIN_4
+  Failed Flop    : U4/FF9
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 13980
+  Vector         : 17672
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 027]
+  Failed Pattern : PATTERN_0731
+  Failed Chain   : CHAIN_2
+  Failed Flop    : U2/FF6
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 28811
+  Vector         : 16960
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 028]
+  Failed Pattern : PATTERN_0124
+  Failed Chain   : CHAIN_1
+  Failed Flop    : U1/FF3
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 22256
+  Vector         : 690
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 029]
+  Failed Pattern : PATTERN_0603
+  Failed Chain   : CHAIN_1
+  Failed Flop    : U1/FF0
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 46489
+  Vector         : 1930
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 030]
+  Failed Pattern : PATTERN_0070
+  Failed Chain   : CHAIN_0
+  Failed Flop    : U0/FF5
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 33795
+  Vector         : 7799
+  Failure Type   : Shift Error
+--------------------------------------------------------------
+[FAIL 031]
+  Failed Pattern : PATTERN_0686
+  Failed Chain   : CHAIN_3
+  Failed Flop    : U3/FF3
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 47505
+  Vector         : 18712
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 032]
+  Failed Pattern : PATTERN_0249
+  Failed Chain   : CHAIN_3
+  Failed Flop    : U3/FF6
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 6281
+  Vector         : 3177
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 033]
+  Failed Pattern : PATTERN_0363
+  Failed Chain   : CHAIN_3
+  Failed Flop    : U3/FF6
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 47880
+  Vector         : 1776
+  Failure Type   : SA0
+--------------------------------------------------------------
+[FAIL 034]
+  Failed Pattern : PATTERN_0063
+  Failed Chain   : CHAIN_3
+  Failed Flop    : U3/FF5
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 16395
+  Vector         : 6279
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 035]
+  Failed Pattern : PATTERN_0550
+  Failed Chain   : CHAIN_3
+  Failed Flop    : U3/FF2
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 12125
+  Vector         : 9128
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 036]
+  Failed Pattern : PATTERN_0256
+  Failed Chain   : CHAIN_0
+  Failed Flop    : U0/FF7
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 3415
+  Vector         : 17714
+  Failure Type   : SA0
+--------------------------------------------------------------
+[FAIL 037]
+  Failed Pattern : PATTERN_0993
+  Failed Chain   : CHAIN_0
+  Failed Flop    : U0/FF3
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 26734
+  Vector         : 15914
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 038]
+  Failed Pattern : PATTERN_0219
+  Failed Chain   : CHAIN_3
+  Failed Flop    : U3/FF0
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 24936
+  Vector         : 71
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 039]
+  Failed Pattern : PATTERN_0272
+  Failed Chain   : CHAIN_3
+  Failed Flop    : U3/FF4
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 45751
+  Vector         : 18212
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 040]
+  Failed Pattern : PATTERN_0159
+  Failed Chain   : CHAIN_1
+  Failed Flop    : U1/FF4
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 3932
+  Vector         : 18979
+  Failure Type   : SA0
+--------------------------------------------------------------
+[FAIL 041]
+  Failed Pattern : PATTERN_0766
+  Failed Chain   : CHAIN_2
+  Failed Flop    : U2/FF0
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 38384
+  Vector         : 15624
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 042]
+  Failed Pattern : PATTERN_0059
+  Failed Chain   : CHAIN_4
+  Failed Flop    : U4/FF1
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 4590
+  Vector         : 19499
+  Failure Type   : SA0
+--------------------------------------------------------------
+[FAIL 043]
+  Failed Pattern : PATTERN_0692
+  Failed Chain   : CHAIN_1
+  Failed Flop    : U1/FF6
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 37434
+  Vector         : 8068
+  Failure Type   : SA0
+--------------------------------------------------------------
+[FAIL 044]
+  Failed Pattern : PATTERN_0635
+  Failed Chain   : CHAIN_0
+  Failed Flop    : U0/FF6
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 17189
+  Vector         : 6694
+  Failure Type   : Shift Error
+--------------------------------------------------------------
+[FAIL 045]
+  Failed Pattern : PATTERN_0245
+  Failed Chain   : CHAIN_2
+  Failed Flop    : U2/FF6
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 44119
+  Vector         : 9831
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 046]
+  Failed Pattern : PATTERN_0324
+  Failed Chain   : CHAIN_0
+  Failed Flop    : U0/FF0
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 40808
+  Vector         : 18449
+  Failure Type   : SA0
+--------------------------------------------------------------
+[FAIL 047]
+  Failed Pattern : PATTERN_0076
+  Failed Chain   : CHAIN_4
+  Failed Flop    : U4/FF3
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 8780
+  Vector         : 11437
+  Failure Type   : SA0
+--------------------------------------------------------------
+[FAIL 048]
+  Failed Pattern : PATTERN_0901
+  Failed Chain   : CHAIN_1
+  Failed Flop    : U1/FF5
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 10438
+  Vector         : 14359
+  Failure Type   : Shift Error
+--------------------------------------------------------------
+[FAIL 049]
+  Failed Pattern : PATTERN_0627
+  Failed Chain   : CHAIN_4
+  Failed Flop    : U4/FF0
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 43575
+  Vector         : 3395
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 050]
+  Failed Pattern : PATTERN_0271
+  Failed Chain   : CHAIN_0
+  Failed Flop    : U0/FF1
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 17948
+  Vector         : 9233
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 051]
+  Failed Pattern : PATTERN_0735
+  Failed Chain   : CHAIN_2
+  Failed Flop    : U2/FF3
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 33222
+  Vector         : 16009
+  Failure Type   : Shift Error
+--------------------------------------------------------------
+[FAIL 052]
+  Failed Pattern : PATTERN_0928
+  Failed Chain   : CHAIN_0
+  Failed Flop    : U0/FF1
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 18232
+  Vector         : 1445
+  Failure Type   : SA0
+--------------------------------------------------------------
+[FAIL 053]
+  Failed Pattern : PATTERN_0342
+  Failed Chain   : CHAIN_1
+  Failed Flop    : U1/FF4
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 48677
+  Vector         : 14479
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 054]
+  Failed Pattern : PATTERN_0575
+  Failed Chain   : CHAIN_0
+  Failed Flop    : U0/FF1
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 45386
+  Vector         : 4885
+  Failure Type   : SA0
+--------------------------------------------------------------
+[FAIL 055]
+  Failed Pattern : PATTERN_0855
+  Failed Chain   : CHAIN_2
+  Failed Flop    : U2/FF9
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 28266
+  Vector         : 4177
+  Failure Type   : SA0
+--------------------------------------------------------------
+[FAIL 056]
+  Failed Pattern : PATTERN_0316
+  Failed Chain   : CHAIN_2
+  Failed Flop    : U2/FF0
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 13867
+  Vector         : 8177
+  Failure Type   : SA0
+--------------------------------------------------------------
+[FAIL 057]
+  Failed Pattern : PATTERN_0363
+  Failed Chain   : CHAIN_4
+  Failed Flop    : U4/FF6
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 15614
+  Vector         : 5325
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 058]
+  Failed Pattern : PATTERN_0903
+  Failed Chain   : CHAIN_3
+  Failed Flop    : U3/FF0
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 48371
+  Vector         : 10886
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 059]
+  Failed Pattern : PATTERN_0822
+  Failed Chain   : CHAIN_1
+  Failed Flop    : U1/FF4
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 46058
+  Vector         : 3543
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 060]
+  Failed Pattern : PATTERN_0894
+  Failed Chain   : CHAIN_0
+  Failed Flop    : U0/FF7
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 13179
+  Vector         : 15084
+  Failure Type   : Shift Error
+--------------------------------------------------------------
+[FAIL 061]
+  Failed Pattern : PATTERN_0313
+  Failed Chain   : CHAIN_1
+  Failed Flop    : U1/FF3
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 43355
+  Vector         : 6329
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 062]
+  Failed Pattern : PATTERN_0337
+  Failed Chain   : CHAIN_2
+  Failed Flop    : U2/FF1
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 23112
+  Vector         : 16693
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 063]
+  Failed Pattern : PATTERN_0696
+  Failed Chain   : CHAIN_4
+  Failed Flop    : U4/FF5
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 7659
+  Vector         : 8560
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 064]
+  Failed Pattern : PATTERN_0595
+  Failed Chain   : CHAIN_2
+  Failed Flop    : U2/FF0
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 39196
+  Vector         : 14240
+  Failure Type   : Shift Error
+--------------------------------------------------------------
+[FAIL 065]
+  Failed Pattern : PATTERN_0747
+  Failed Chain   : CHAIN_2
+  Failed Flop    : U2/FF6
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 25344
+  Vector         : 18894
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 066]
+  Failed Pattern : PATTERN_0261
+  Failed Chain   : CHAIN_0
+  Failed Flop    : U0/FF6
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 34173
+  Vector         : 17644
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 067]
+  Failed Pattern : PATTERN_0373
+  Failed Chain   : CHAIN_3
+  Failed Flop    : U3/FF1
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 40939
+  Vector         : 10287
+  Failure Type   : SA0
+--------------------------------------------------------------
+[FAIL 068]
+  Failed Pattern : PATTERN_0738
+  Failed Chain   : CHAIN_2
+  Failed Flop    : U2/FF8
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 43805
+  Vector         : 13383
+  Failure Type   : Shift Error
+--------------------------------------------------------------
+[FAIL 069]
+  Failed Pattern : PATTERN_0413
+  Failed Chain   : CHAIN_2
+  Failed Flop    : U2/FF8
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 12672
+  Vector         : 13778
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 070]
+  Failed Pattern : PATTERN_0694
+  Failed Chain   : CHAIN_1
+  Failed Flop    : U1/FF9
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 26712
+  Vector         : 17955
+  Failure Type   : SA0
+--------------------------------------------------------------
+[FAIL 071]
+  Failed Pattern : PATTERN_0312
+  Failed Chain   : CHAIN_2
+  Failed Flop    : U2/FF3
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 38109
+  Vector         : 19880
+  Failure Type   : Shift Error
+--------------------------------------------------------------
+[FAIL 072]
+  Failed Pattern : PATTERN_0477
+  Failed Chain   : CHAIN_3
+  Failed Flop    : U3/FF7
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 33600
+  Vector         : 15506
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 073]
+  Failed Pattern : PATTERN_0675
+  Failed Chain   : CHAIN_0
+  Failed Flop    : U0/FF4
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 6220
+  Vector         : 7697
+  Failure Type   : Shift Error
+--------------------------------------------------------------
+[FAIL 074]
+  Failed Pattern : PATTERN_0231
+  Failed Chain   : CHAIN_1
+  Failed Flop    : U1/FF2
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 3128
+  Vector         : 8024
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 075]
+  Failed Pattern : PATTERN_0626
+  Failed Chain   : CHAIN_0
+  Failed Flop    : U0/FF7
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 41372
+  Vector         : 18864
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 076]
+  Failed Pattern : PATTERN_0736
+  Failed Chain   : CHAIN_3
+  Failed Flop    : U3/FF7
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 16089
+  Vector         : 4836
+  Failure Type   : SA0
+--------------------------------------------------------------
+[FAIL 077]
+  Failed Pattern : PATTERN_0915
+  Failed Chain   : CHAIN_0
+  Failed Flop    : U0/FF6
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 11626
+  Vector         : 16973
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 078]
+  Failed Pattern : PATTERN_0052
+  Failed Chain   : CHAIN_4
+  Failed Flop    : U4/FF3
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 30014
+  Vector         : 4370
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 079]
+  Failed Pattern : PATTERN_0684
+  Failed Chain   : CHAIN_4
+  Failed Flop    : U4/FF8
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 49596
+  Vector         : 14503
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 080]
+  Failed Pattern : PATTERN_0851
+  Failed Chain   : CHAIN_4
+  Failed Flop    : U4/FF7
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 48836
+  Vector         : 15555
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 081]
+  Failed Pattern : PATTERN_0266
+  Failed Chain   : CHAIN_1
+  Failed Flop    : U1/FF4
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 41174
+  Vector         : 7840
+  Failure Type   : Shift Error
+--------------------------------------------------------------
+[FAIL 082]
+  Failed Pattern : PATTERN_0451
+  Failed Chain   : CHAIN_0
+  Failed Flop    : U0/FF4
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 17907
+  Vector         : 11006
+  Failure Type   : Shift Error
+--------------------------------------------------------------
+[FAIL 083]
+  Failed Pattern : PATTERN_0915
+  Failed Chain   : CHAIN_4
+  Failed Flop    : U4/FF1
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 9984
+  Vector         : 7578
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 084]
+  Failed Pattern : PATTERN_0711
+  Failed Chain   : CHAIN_1
+  Failed Flop    : U1/FF3
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 27288
+  Vector         : 13357
+  Failure Type   : Shift Error
+--------------------------------------------------------------
+[FAIL 085]
+  Failed Pattern : PATTERN_0556
+  Failed Chain   : CHAIN_3
+  Failed Flop    : U3/FF6
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 13655
+  Vector         : 13768
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 086]
+  Failed Pattern : PATTERN_0927
+  Failed Chain   : CHAIN_4
+  Failed Flop    : U4/FF0
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 31359
+  Vector         : 194
+  Failure Type   : Shift Error
+--------------------------------------------------------------
+[FAIL 087]
+  Failed Pattern : PATTERN_0306
+  Failed Chain   : CHAIN_3
+  Failed Flop    : U3/FF6
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 32096
+  Vector         : 7191
+  Failure Type   : Shift Error
+--------------------------------------------------------------
+[FAIL 088]
+  Failed Pattern : PATTERN_0447
+  Failed Chain   : CHAIN_3
+  Failed Flop    : U3/FF0
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 22128
+  Vector         : 13249
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 089]
+  Failed Pattern : PATTERN_0861
+  Failed Chain   : CHAIN_3
+  Failed Flop    : U3/FF2
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 25922
+  Vector         : 19396
+  Failure Type   : SA0
+--------------------------------------------------------------
+[FAIL 090]
+  Failed Pattern : PATTERN_0086
+  Failed Chain   : CHAIN_3
+  Failed Flop    : U3/FF2
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 12009
+  Vector         : 1648
+  Failure Type   : Shift Error
+--------------------------------------------------------------
+[FAIL 091]
+  Failed Pattern : PATTERN_0389
+  Failed Chain   : CHAIN_2
+  Failed Flop    : U2/FF3
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 21520
+  Vector         : 11060
+  Failure Type   : Capture Error
+--------------------------------------------------------------
+[FAIL 092]
+  Failed Pattern : PATTERN_0285
+  Failed Chain   : CHAIN_3
+  Failed Flop    : U3/FF4
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 30922
+  Vector         : 636
+  Failure Type   : SA0
+--------------------------------------------------------------
+[FAIL 093]
+  Failed Pattern : PATTERN_0975
+  Failed Chain   : CHAIN_2
+  Failed Flop    : U2/FF3
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 42813
+  Vector         : 1320
+  Failure Type   : SA0
+--------------------------------------------------------------
+[FAIL 094]
+  Failed Pattern : PATTERN_0973
+  Failed Chain   : CHAIN_1
+  Failed Flop    : U1/FF3
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 40819
+  Vector         : 4994
+  Failure Type   : SA1
+--------------------------------------------------------------
+[FAIL 095]
+  Failed Pattern : PATTERN_0130
+  Failed Chain   : CHAIN_3
+  Failed Flop    : U3/FF1
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 30576
+  Vector         : 8397
+  Failure Type   : Shift Error
+--------------------------------------------------------------
+[FAIL 096]
+  Failed Pattern : PATTERN_0172
+  Failed Chain   : CHAIN_4
+  Failed Flop    : U4/FF9
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 10832
+  Vector         : 10193
+  Failure Type   : SA0
+--------------------------------------------------------------
+[FAIL 097]
+  Failed Pattern : PATTERN_0593
+  Failed Chain   : CHAIN_0
+  Failed Flop    : U0/FF4
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 26095
+  Vector         : 6499
+  Failure Type   : SA0
+--------------------------------------------------------------
+[FAIL 098]
+  Failed Pattern : PATTERN_0607
+  Failed Chain   : CHAIN_1
+  Failed Flop    : U1/FF1
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 44943
+  Vector         : 19675
+  Failure Type   : SA0
+--------------------------------------------------------------
+[FAIL 099]
+  Failed Pattern : PATTERN_0816
+  Failed Chain   : CHAIN_4
+  Failed Flop    : U4/FF0
+  Expected Value : 1
+  Actual Value   : 0
+  Cycle          : 35013
+  Vector         : 14038
+  Failure Type   : Shift Error
+--------------------------------------------------------------
+[FAIL 100]
+  Failed Pattern : PATTERN_0071
+  Failed Chain   : CHAIN_4
+  Failed Flop    : U4/FF5
+  Expected Value : 0
+  Actual Value   : 1
+  Cycle          : 27628
+  Vector         : 16063
+  Failure Type   : SA0
+--------------------------------------------------------------
+
+============== END OF FAIL REPORT ============================

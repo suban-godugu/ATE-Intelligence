@@ -1,0 +1,15 @@
+STIL 1.0;
+Header {
+  Title "Fake Pattern File";
+  LotId "FAKE_LOT_999";
+}
+ScanStructures {
+  ScanChain "IMPOSSIBLE_CHAIN" {
+    ScanLength -500;
+  }
+}
+Pattern "TEST_PATTERN_XXXXXXX" {
+  V { "UNKNOWN_SIGNAL"=Z; }
+}
+// This file contains physically impossible values like negative scan length
+// to test the AI validator's rejection logic.

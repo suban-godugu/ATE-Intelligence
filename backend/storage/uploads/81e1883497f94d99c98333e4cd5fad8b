@@ -1,0 +1,114 @@
+STIL 1.0;
+
+Header {
+    Title "Sample Scan Test STIL";
+    Date "2026-04-14";
+    Source "ChatGPT Generated Test Pattern";
+}
+
+Signals {
+    CLK     In;
+    RESET   In;
+    SE      In;
+    SI1     In;
+    SI2     In;
+    PI1     In;
+    PI2     In;
+
+    SO1     Out;
+    SO2     Out;
+    PO1     Out;
+    PO2     Out;
+}
+
+SignalGroups {
+    SCAN_IN  = 'SI1+SI2';
+    SCAN_OUT = 'SO1+SO2';
+    PRIMARY_IN  = 'PI1+PI2';
+    PRIMARY_OUT = 'PO1+PO2';
+    ALL_INPUTS  = 'CLK+RESET+SE+SI1+SI2+PI1+PI2';
+    ALL_OUTPUTS = 'SO1+SO2+PO1+PO2';
+}
+
+ScanStructures {
+    ScanChain "chain1" {
+        ScanLength 8;
+        ScanIn SI1;
+        ScanOut SO1;
+    }
+
+    ScanChain "chain2" {
+        ScanLength 8;
+        ScanIn SI2;
+        ScanOut SO2;
+    }
+}
+
+Timing {
+    WaveformTable "WFT_SCAN" {
+        Period '100ns';
+
+        Waveforms {
+            CLK  { 0ns:D; 50ns:U; }
+            SE   { 0ns:D; }
+            SI1  { 0ns:D; }
+            SI2  { 0ns:D; }
+            SO1  { 80ns:Z; }
+            SO2  { 80ns:Z; }
+        }
+    }
+}
+
+PatternBurst "BURST_SCAN_TEST" {
+    PatList {
+        PATTERN_001;
+        PATTERN_002;
+        PATTERN_003;
+    }
+}
+
+PatternExec {
+    PatternBurst "BURST_SCAN_TEST";
+}
+
+Pattern "PATTERN_001" {
+    W "WFT_SCAN";
+
+    Vector {
+        ALL_INPUTS = 0001010;
+        ALL_OUTPUTS = XXXX;
+    }
+
+    Vector {
+        ALL_INPUTS = 1001011;
+        ALL_OUTPUTS = 10XX;
+    }
+}
+
+Pattern "PATTERN_002" {
+    W "WFT_SCAN";
+
+    Vector {
+        ALL_INPUTS = 0101100;
+        ALL_OUTPUTS = 01XX;
+    }
+
+    Vector {
+        ALL_INPUTS = 1101101;
+        ALL_OUTPUTS = 11XX;
+    }
+}
+
+Pattern "PATTERN_003" {
+    W "WFT_SCAN";
+
+    Vector {
+        ALL_INPUTS = 0011110;
+        ALL_OUTPUTS = 00XX;
+    }
+
+    Vector {
+        ALL_INPUTS = 1011111;
+        ALL_OUTPUTS = 10XX;
+    }
+}

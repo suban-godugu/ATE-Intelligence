@@ -1,0 +1,101 @@
+import dotenv from 'dotenv';
+dotenv.config();
+// Restart triggered to reload .env
+
+import express from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+import { requestLogger } from './middleware/logger';
+import { errorHandler } from './middleware/error';
+import { authenticate } from './middleware/auth';
+import authRoutes from './routes/auth.routes';
+import lotRoutes from './routes/lot.routes';
+import patternRoutes from './routes/pattern.routes';
+import coverageRoutes from './routes/coverage.routes';
+import scanChainRunRoutes from './routes/scanChainRun.routes';
+import mbistRoutes from './routes/mbist.routes';
+import lbistRoutes from './routes/lbist.routes';
+import overviewRoutes from './routes/overview.routes';
+import redundancyRoutes from './routes/redundancy.routes';
+import correlationRoutes from './routes/correlation.routes';
+import aiRoutes from './routes/ai.routes';
+import dashboardRoutes from './routes/dashboard.routes';
+import optimizationRoutes from './routes/optimization.routes';
+import uploadRoutes from './routes/upload.routes';
+import exportRoutes from './routes/export.routes';
+import filterRoutes from './routes/filter.routes';
+import headlessRoutes from './routes/headless.routes';   // ← Headless AI API v1
+
+const app = express();
+const PORT = process.env.PORT || 4000;
+
+// 1. Request Logger
+app.use(requestLogger);
+
+// 2. CORS
+app.use(cors({
+  origin: process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : ['http://localhost:5173', 'http://localhost:5174'],
+  credentials: true
+}));
+
+// 3. Helmet
+app.use(helmet());
+
+// 4. Rate Limiter (Safely increased for dashboard stability)
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10000, 
+  message: { success: false, error: 'Too many requests, please try again later.' }
+});
+app.use('/api/', limiter);
+
+app.use(express.json());
+
+// 5. Routes
+
+import aiOptimizationRoutes from './routes/aiOptimization.routes';
+import specRoutes from './routes/spec.routes';
+
+// Auth routes (NOT authenticated)
+app.use('/api/auth', authRoutes);
+
+// Spec routes (NOT authenticated for development bypass)
+app.use('/api', specRoutes);
+
+// Apply authenticate to all other /api/* routes
+app.use('/api', authenticate);
+
+// Protected routes
+app.use('/api/lots', lotRoutes);
+app.use('/api/lots/:lotId/patterns', patternRoutes);
+app.use('/api/lots/:lotId/coverage', coverageRoutes);
+app.use('/api/lots/:lotId/scanchains', scanChainRunRoutes);
+app.use('/api/lots/:lotId/mbist', mbistRoutes);
+app.use('/api/lots/:lotId/lbist', lbistRoutes);
+app.use('/api/lots/:lotId/overview', overviewRoutes);
+app.use('/api/lots/:lotId/redundancy', redundancyRoutes);
+app.use('/api/lots/:lotId/correlation', correlationRoutes);
+app.use('/api/lots/:lotId/ai', aiRoutes);
+app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/optimization', optimizationRoutes);
+app.use('/api/ai-optimize', aiOptimizationRoutes);
+app.use('/api/filters', filterRoutes);
+app.use('/api/upload', uploadRoutes);
+app.use('/api/lots/:lotId/export', exportRoutes);
+
+// ─── Headless AI API Gateway (/api/v1/) ────────────────────────────────────
+// API-First endpoints for external systems, AI agents, MES/ERP, chatbots.
+// Protected by x-api-key header authentication.
+app.use('/api/v1', headlessRoutes);
+
+// Error Handling
+app.use(errorHandler);
+
+app.listen(PORT, () => {
+  console.log(`🚀 ATE Intelligence API running at http://localhost:${PORT}`);
+  console.log(`🤖 Headless AI API (v1) at  http://localhost:${PORT}/api/v1/health`);
+  console.log(`🔑 API Key: ${process.env.HEADLESS_API_KEY || '(not set)'}`);
+});
+
+export default app;

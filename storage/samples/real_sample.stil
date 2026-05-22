@@ -1,0 +1,24 @@
+STIL 1.0;
+Header {
+  Title "Industrial ATE STIL Example";
+  Date "2026-05-07";
+  Source "ATE Intelligence Generator";
+}
+Signals {
+  "CLK" In; "RESET" In; "DATA_IN" In; "DATA_OUT" Out;
+}
+ScanStructures {
+  ScanChain "SC_001" {
+    ScanLength 1024;
+    ScanIn "SI_001";
+    ScanOut "SO_001";
+  }
+}
+PatternBurst "MainPatterns" {
+  PatList { "SCAN_TEST_001"; "ATPG_STUCK_001"; }
+}
+Pattern "SCAN_TEST_001" {
+  W "StandardWaveform";
+  V { "CLK"=0; "RESET"=1; "DATA_IN"=0; }
+  V { "CLK"=1; "RESET"=0; "DATA_IN"=1; }
+}

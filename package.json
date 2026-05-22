@@ -1,0 +1,20 @@
+{
+  "name": "ate-intelligence",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend",
+    "ai-models"
+  ],
+  "scripts": {
+    "dev:frontend": "npm -w frontend run dev",
+    "dev:backend": "npm -w backend run dev",
+    "dev:ai": "npm -w ai-models run dev",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "build:ai": "npm -w ai-models run build",
+    "install:all": "npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
