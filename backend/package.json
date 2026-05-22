@@ -2,11 +2,11 @@
   "name": "ate-intelligence-backend",
   "version": "1.0.0",
   "description": "ATE Intelligence Pattern Analysis Backend API",
-  "main": "dist/index.js",
+  "main": "dist/backend/src/index.js",
   "scripts": {
     "dev": "set NODE_OPTIONS=--max-old-space-size=4096 && ts-node-dev --respawn --transpile-only src/index.ts",
     "build": "tsc",
-    "start": "set NODE_OPTIONS=--max-old-space-size=4096 && node dist/index.js",
+    "start": "node dist/backend/src/index.js",
     "prisma:generate": "prisma generate --schema=src/prisma/schema.sqlite.prisma",
     "prisma:generate:pg": "prisma generate --schema=src/prisma/schema.prisma",
     "prisma:push": "prisma db push --schema=src/prisma/schema.sqlite.prisma",

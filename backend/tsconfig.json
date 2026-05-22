@@ -16,11 +16,12 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "baseUrl": ".",
+    "rootDir": "..",
     "paths": {
       "@ate/ai-models": ["../ai-models/index.ts"],
       "@ate/ai-models/*": ["../ai-models/*"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "../ai-models/**/*"],
   "exclude": ["node_modules", "dist"]
 }
