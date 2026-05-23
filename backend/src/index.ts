@@ -89,6 +89,26 @@ app.use('/api/filters', filterRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/lots/:lotId/export', exportRoutes);
 
+// --- Fallback aliases for frontend calling without /api prefix ---
+// These match the existing routes but are mounted at the root level.
+app.use('/', specRoutes);
+app.use('/lots', lotRoutes);
+app.use('/lots/:lotId/patterns', patternRoutes);
+app.use('/lots/:lotId/coverage', coverageRoutes);
+app.use('/lots/:lotId/scanchains', scanChainRunRoutes);
+app.use('/lots/:lotId/mbist', mbistRoutes);
+app.use('/lots/:lotId/lbist', lbistRoutes);
+app.use('/lots/:lotId/overview', overviewRoutes);
+app.use('/lots/:lotId/redundancy', redundancyRoutes);
+app.use('/lots/:lotId/correlation', correlationRoutes);
+app.use('/lots/:lotId/ai', aiRoutes);
+app.use('/dashboard', dashboardRoutes);
+app.use('/optimization', optimizationRoutes);
+app.use('/ai-optimize', aiOptimizationRoutes);
+app.use('/filters', filterRoutes);
+app.use('/upload', uploadRoutes);
+app.use('/lots/:lotId/export', exportRoutes);
+
 // ─── Headless AI API Gateway (/api/v1/) ────────────────────────────────────
 // API-First endpoints for external systems, AI agents, MES/ERP, chatbots.
 // Protected by x-api-key header authentication.
