@@ -128,10 +128,10 @@ const App = () => {
       </Route>
 
       <Route
-        path="/wafer-analysis"
+        path="/wafer-lot-analytics"
         element={
           <ProtectedRoute>
-            <AppLayout><ComingSoon title="Wafer Analysis" description="Interactive wafer-level pass/fail heatmaps and die-correlation maps are coming in v3.0." /></AppLayout>
+            <AppLayout><ComingSoon title="Wafer / Lot Analytics" description="Cross-lot trend analysis, interactive wafer-level heatmaps, and yield correlation charts." /></AppLayout>
           </ProtectedRoute>
         }
       />
@@ -145,14 +145,7 @@ const App = () => {
         }
       />
 
-      <Route
-        path="/lot-analytics"
-        element={
-          <ProtectedRoute>
-            <AppLayout><ComingSoon title="Lot Analytics" description="Cross-lot trend analysis, yield correlation, and statistical process control charts." /></AppLayout>
-          </ProtectedRoute>
-        }
-      />
+
 
       <Route
         path="/equipment"

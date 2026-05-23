@@ -44,7 +44,6 @@ const navGroups: NavGroup[] = [
   {
     label: 'Engineering',
     items: [
-      { icon: Globe, label: 'Wafer Analysis', path: '/wafer-analysis' },
       { icon: Layers, label: 'Pattern Analysis', path: '/patterns' },
       { icon: Cpu, label: 'Test Optimization', path: '/test-optimization' },
     ],
@@ -52,7 +51,7 @@ const navGroups: NavGroup[] = [
   {
     label: 'Operations',
     items: [
-      { icon: BarChart3, label: 'Lot Analytics', path: '/lot-analytics' },
+      { icon: BarChart3, label: 'Wafer / Lot Analytics', path: '/wafer-lot-analytics' },
       { icon: Wrench, label: 'Equipment', path: '/equipment' },
       { icon: BarChart, label: 'Cost Intelligence', path: '/cost-intelligence' },
     ],

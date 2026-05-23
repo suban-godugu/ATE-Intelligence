@@ -123,4 +123,4 @@ app.listen(PORT, () => {
   console.log(`🔑 API Key: ${process.env.HEADLESS_API_KEY || '(not set)'}`);
 });
 
-export default app;
+export default app
