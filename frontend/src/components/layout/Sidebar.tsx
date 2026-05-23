@@ -2,7 +2,6 @@ import { NavLink } from 'react-router-dom';
 import {
   Home,
   Upload,
-  Globe,
   Layers,
   BarChart,
   Cpu,
