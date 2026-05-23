@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { 
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, 
-  ResponsiveContainer, Legend 
+import {
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip,
+  ResponsiveContainer, Legend
 } from 'recharts';
 import { Info, ChevronDown } from 'lucide-react';
 import { useCostTrend } from '@/hooks/dashboard/useDashboardHooks';
@@ -47,9 +47,9 @@ export const CostTrendChart = () => {
           <h3 className="text-sm font-bold text-white uppercase tracking-wider">Cost Trend</h3>
           <Info className="w-4 h-4 text-slate-600 cursor-help" />
         </div>
-        
+
         <div className="relative group">
-          <select 
+          <select
             value={granularity}
             onChange={(e) => setGranularity(e.target.value)}
             className="bg-[#1E2A3B] border border-white/10 rounded-lg pl-3 pr-8 py-1.5 text-[11px] font-bold text-slate-300 appearance-none focus:outline-none focus:border-[#6C63FF]/50 transition-all cursor-pointer"
@@ -70,43 +70,43 @@ export const CostTrendChart = () => {
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={trend} margin={{ top: 10, right: 10, left: 10, bottom: 10 }}>
               <CartesianGrid vertical={false} stroke="rgba(255,255,255,0.05)" />
-              <XAxis 
-                dataKey="date" 
-                axisLine={false} 
-                tickLine={false} 
+              <XAxis
+                dataKey="date"
+                axisLine={false}
+                tickLine={false}
                 tick={{ fontSize: 10, fill: '#64748B', fontWeight: 600 }}
                 dy={10}
               />
-              <YAxis 
-                axisLine={false} 
-                tickLine={false} 
+              <YAxis
+                axisLine={false}
+                tickLine={false}
                 tick={{ fontSize: 10, fill: '#64748B' }}
                 tickFormatter={(v) => `$${(v / 1000000).toFixed(1)}M`}
               />
               <Tooltip content={<CustomTooltip />} />
-              <Line 
-                type="monotone" 
-                dataKey="totalCostUSD" 
-                stroke="#7F77DD" 
-                strokeWidth={3} 
-                dot={{ r: 4, fill: '#7F77DD', strokeWidth: 0 }} 
+              <Line
+                type="monotone"
+                dataKey="totalCostUSD"
+                stroke="#7F77DD"
+                strokeWidth={3}
+                dot={{ r: 4, fill: '#7F77DD', strokeWidth: 0 }}
                 activeDot={{ r: 6, fill: '#7F77DD', strokeWidth: 0 }}
                 name="Total Cost (USD)"
                 animationDuration={1500}
               />
-              <Line 
-                type="monotone" 
-                dataKey="costPerWaferUSD" 
-                stroke="#378ADD" 
-                strokeWidth={3} 
-                dot={{ r: 4, fill: '#378ADD', strokeWidth: 0 }} 
+              <Line
+                type="monotone"
+                dataKey="costPerWaferUSD"
+                stroke="#378ADD"
+                strokeWidth={3}
+                dot={{ r: 4, fill: '#378ADD', strokeWidth: 0 }}
                 activeDot={{ r: 6, fill: '#378ADD', strokeWidth: 0 }}
                 name="Cost per Wafer (USD)"
                 animationDuration={1500}
               />
-              <Legend 
-                verticalAlign="bottom" 
-                align="left" 
+              <Legend
+                verticalAlign="bottom"
+                align="left"
                 iconType="plainline"
                 content={({ payload }) => (
                   <div className="flex gap-6 mt-8">

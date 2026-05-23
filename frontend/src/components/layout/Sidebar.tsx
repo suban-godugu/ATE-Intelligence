@@ -37,40 +37,40 @@ const navGroups: NavGroup[] = [
   {
     label: 'Analytics',
     items: [
-      { icon: Home,   label: 'Dashboard',   path: '/dashboard' },
+      { icon: Home, label: 'Dashboard', path: '/dashboard' },
       { icon: Upload, label: 'Upload Files', path: '/upload' },
     ],
   },
   {
     label: 'Engineering',
     items: [
-      { icon: Globe,   label: 'Wafer Analysis',   path: '/wafer-analysis' },
-      { icon: Layers,  label: 'Pattern Analysis',  path: '/patterns' },
-      { icon: Cpu,     label: 'Test Optimization', path: '/test-optimization' },
+      { icon: Globe, label: 'Wafer Analysis', path: '/wafer-analysis' },
+      { icon: Layers, label: 'Pattern Analysis', path: '/patterns' },
+      { icon: Cpu, label: 'Test Optimization', path: '/test-optimization' },
     ],
   },
   {
     label: 'Operations',
     items: [
-      { icon: BarChart3, label: 'Lot Analytics',     path: '/lot-analytics' },
-      { icon: Wrench,    label: 'Equipment',         path: '/equipment' },
-      { icon: BarChart,  label: 'Cost Intelligence', path: '/cost-intelligence' },
+      { icon: BarChart3, label: 'Lot Analytics', path: '/lot-analytics' },
+      { icon: Wrench, label: 'Equipment', path: '/equipment' },
+      { icon: BarChart, label: 'Cost Intelligence', path: '/cost-intelligence' },
     ],
   },
   {
     label: 'System',
     items: [
-      { icon: FileText, label: 'Reports',  path: '/reports' },
-      { icon: Bell,     label: 'Alerts',   path: '/alerts' },
+      { icon: FileText, label: 'Reports', path: '/reports' },
+      { icon: Bell, label: 'Alerts', path: '/alerts' },
       { icon: Settings, label: 'Settings', path: '/settings' },
     ],
   },
 ];
 
 export const Sidebar = () => {
-  const collapsed  = useAppStore(s => s.sidebarCollapsed);
-  const toggle     = useAppStore(s => s.toggleSidebar);
-  const filters    = useFilterStore();
+  const collapsed = useAppStore(s => s.sidebarCollapsed);
+  const toggle = useAppStore(s => s.toggleSidebar);
+  const filters = useFilterStore();
   const { data: options } = useFilterOptions();
 
   return (
@@ -197,8 +197,8 @@ export const Sidebar = () => {
 
             {/* Dropdowns */}
             {[
-              { label: 'Fab',     value: filters.fabId,     setter: filters.setFab,     opts: options?.fabs     || [] },
-              { label: 'Tester',  value: filters.testerId,  setter: filters.setTester,  opts: options?.testers  || [] },
+              { label: 'Fab', value: filters.fabId, setter: filters.setFab, opts: options?.fabs || [] },
+              { label: 'Tester', value: filters.testerId, setter: filters.setTester, opts: options?.testers || [] },
               { label: 'Product', value: filters.productId, setter: filters.setProduct, opts: options?.products || [] },
             ].map(f => (
               <div key={f.label} className="relative">

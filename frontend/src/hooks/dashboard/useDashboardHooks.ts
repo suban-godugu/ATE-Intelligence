@@ -7,8 +7,8 @@ export const useDashboardKpis = () => {
   return useQuery({
     queryKey: ['dashboard-kpis', fabId, testerId, productId, lotId, startDate, endDate],
     queryFn: async () => {
-      const { data } = await apiClient.get('/dashboard/kpis', { 
-        params: { fabId, testerId, productId, lotId, startDate, endDate } 
+      const { data } = await apiClient.get('/dashboard/kpis', {
+        params: { fabId, testerId, productId, lotId, startDate, endDate }
       });
       return data.data;
     }
@@ -42,8 +42,8 @@ export const useCostTrend = (granularity: string) => {
   return useQuery({
     queryKey: ['cost-trend', granularity, fabId, testerId, productId, lotId, startDate, endDate],
     queryFn: async () => {
-      const { data } = await apiClient.get('/dashboard/cost-trend', { 
-        params: { fabId, testerId, productId, lotId, startDate, endDate, granularity } 
+      const { data } = await apiClient.get('/dashboard/cost-trend', {
+        params: { fabId, testerId, productId, lotId, startDate, endDate, granularity }
       });
       return data.data;
     }

@@ -48,7 +48,7 @@ export const PatternCostTable = () => {
           <h3 className="text-sm font-bold text-white uppercase tracking-wider">Pattern Cost Analysis</h3>
           <HelpCircle className="w-4 h-4 text-slate-600 cursor-help" />
         </div>
-        <Link 
+        <Link
           to="/patterns/library"
           className="text-[11px] font-bold text-[#6C63FF] hover:text-white flex items-center gap-1.5 transition-colors group"
         >
@@ -78,7 +78,7 @@ export const PatternCostTable = () => {
               patterns?.map((p) => (
                 <tr key={p.patternId} className="group hover:bg-white/[0.02] transition-colors">
                   <td className="py-3 pl-2">
-                    <Link 
+                    <Link
                       to={`/patterns/library?highlight=${p.patternId}`}
                       className="text-[#378ADD] hover:text-ate-cyan font-mono font-bold flex items-center gap-1.5"
                     >
@@ -96,7 +96,7 @@ export const PatternCostTable = () => {
                     {p.roiScore}
                   </td>
                   <td className="py-3 pr-2">
-                    <button 
+                    <button
                       className={cn(
                         "px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border transition-all active:scale-95",
                         getBadgeClass(p.recommendation)
