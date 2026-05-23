@@ -19,10 +19,10 @@ const KpiCard = ({ label, value, sub, icon: Icon, color, isDanger, isSuccess, is
       ? 'text-[var(--accent-teal)]' 
       : isWarning 
         ? 'text-[var(--accent-amber)]' 
-        : 'text-white';
+        : 'text-[var(--text-primary)]';
 
   return (
-    <div className="bg-[var(--bg-card)] rounded-2xl border border-[var(--border)] p-5 flex flex-col justify-between h-32 transition-all hover:border-[var(--border-hover)] shadow-lg">
+    <div className="bg-[var(--bg-card)] rounded-[var(--radius-lg)] border border-[var(--border)] p-5 flex flex-col justify-between h-32 transition-all hover:border-[var(--border-hover)] shadow-lg">
       <div className="flex justify-between items-start">
         <span className="text-[11px] text-[var(--text-secondary)] font-bold uppercase tracking-wider">{label}</span>
         <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-white/[0.03]">
@@ -85,7 +85,7 @@ export const PatternFailAnalysis = () => {
           value={kpis.total_patterns} 
           sub="All domains" 
           icon={Layers} 
-          color="#6C63FF" 
+          color="var(--accent-primary)" 
         />
         <KpiCard 
           label="Fault Coverage" 
@@ -100,7 +100,7 @@ export const PatternFailAnalysis = () => {
           value={`${kpis.atpg_efficiency_pct}%`} 
           sub="Vectors / fault" 
           icon={Activity} 
-          color="#00D9FF" 
+          color="var(--accent-cyan)" 
         />
         <KpiCard 
           label="Total Test Time" 
@@ -128,25 +128,25 @@ export const PatternFailAnalysis = () => {
       </div>
 
       {/* ── Search & Filter Controls ── */}
-      <div className="bg-[var(--bg-card)] rounded-2xl border border-[var(--border)] p-4 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-[var(--bg-card)] rounded-[var(--radius-lg)] border border-[var(--border)] p-4 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="relative group w-full max-w-md">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-secondary)] group-focus-within:text-[#6C63FF] transition-colors" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-secondary)] group-focus-within:text-[var(--accent-primary)] transition-colors" />
           <input
             type="text"
             placeholder="Search pattern ID, domain, type..."
             value={search}
             onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-            className="w-full bg-[var(--bg-input)] border border-[var(--border)] rounded-xl pl-12 pr-4 py-2.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-[#6C63FF]/50 transition-all placeholder:text-[var(--text-muted)]"
+            className="w-full bg-[var(--bg-input)] border border-[var(--border)] rounded-[var(--radius-md)] pl-12 pr-4 py-2.5 text-sm text-[var(--text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--accent-primary)]/50 transition-all placeholder:text-[var(--text-muted)]"
           />
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
-          <div className="flex items-center gap-2 bg-[var(--bg-input)] border border-[var(--border)] rounded-xl px-3 py-2">
+          <div className="flex items-center gap-2 bg-[var(--bg-input)] border border-[var(--border)] rounded-[var(--radius-md)] px-3 py-2">
             <Filter className="w-3.5 h-3.5 text-[var(--text-secondary)]" />
             <select
               value={type}
               onChange={(e) => { setType(e.target.value); setPage(1); }}
-              className="bg-transparent text-xs text-white border-none focus:outline-none cursor-pointer"
+              className="bg-transparent text-xs text-[var(--text-primary)] border-none focus:outline-none cursor-pointer"
             >
               <option value="" className="bg-[var(--bg-card)]">All Types</option>
               <option value="SCAN" className="bg-[var(--bg-card)]">SCAN</option>
@@ -156,12 +156,12 @@ export const PatternFailAnalysis = () => {
             </select>
           </div>
 
-          <div className="flex items-center gap-2 bg-[var(--bg-input)] border border-[var(--border)] rounded-xl px-3 py-2">
+          <div className="flex items-center gap-2 bg-[var(--bg-input)] border border-[var(--border)] rounded-[var(--radius-md)] px-3 py-2">
             <Filter className="w-3.5 h-3.5 text-[var(--text-secondary)]" />
             <select
               value={domain}
               onChange={(e) => { setDomain(e.target.value); setPage(1); }}
-              className="bg-transparent text-xs text-white border-none focus:outline-none cursor-pointer"
+              className="bg-transparent text-xs text-[var(--text-primary)] border-none focus:outline-none cursor-pointer"
             >
               <option value="" className="bg-[var(--bg-card)]">All Domains</option>
               <option value="IO" className="bg-[var(--bg-card)]">IO</option>
@@ -175,7 +175,7 @@ export const PatternFailAnalysis = () => {
           {(search || type || domain) && (
             <button
               onClick={handleResetFilters}
-              className="text-xs font-bold text-[#6C63FF] hover:underline px-2 py-1"
+              className="text-xs font-bold text-[var(--accent-primary)] hover:underline px-2 py-1"
             >
               Reset Filters
             </button>
@@ -186,11 +186,11 @@ export const PatternFailAnalysis = () => {
       {/* ── Table & Interactive Analysis Split View ── */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
         {/* Table Card */}
-        <div className="lg:col-span-2 bg-[var(--bg-card)] rounded-2xl border border-[var(--border)] overflow-hidden shadow-2xl">
+        <div className="lg:col-span-2 bg-[var(--bg-card)] rounded-[var(--radius-lg)] border border-[var(--border)] overflow-hidden shadow-2xl">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-black/20 border-b border-[var(--border)]">
+                <tr className="bg-[var(--bg-base)] border-b border-[var(--border)]">
                   {['Pattern ID', 'Type', 'Test Time', 'Cost/Die', 'Coverage', 'Fail Rate', 'Power', 'Domain', 'Action'].map((h) => (
                     <th key={h} className="py-4 px-5 text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">{h}</th>
                   ))}
@@ -217,13 +217,13 @@ export const PatternFailAnalysis = () => {
                         className={`hover:bg-white/[0.02] cursor-pointer transition-colors ${isSelected ? 'bg-white/[0.03]' : ''}`}
                       >
                         <td className="py-3.5 px-5">
-                          <span className="font-mono text-xs font-bold text-[#6C63FF] flex items-center gap-1 hover:underline">
+                          <span className="font-mono text-xs font-bold text-[var(--accent-primary)] flex items-center gap-1 hover:underline">
                             {p.patternId}
                             <ArrowUpRight className="w-3 h-3 text-[var(--text-muted)]" />
                           </span>
                         </td>
                         <td className="py-3.5 px-5">
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/[0.04] border border-white/[0.06] text-white">
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/[0.04] border border-white/[0.06] text-[var(--text-primary)]">
                             {p.type}
                           </span>
                         </td>
@@ -232,7 +232,7 @@ export const PatternFailAnalysis = () => {
                         <td className="py-3.5 px-5">
                           <div className="flex items-center gap-2">
                             <span className="text-xs font-bold font-mono text-[var(--text-primary)] w-9">{p.coverage_pct}%</span>
-                            <div className="w-16 h-1.5 bg-black/30 rounded-full overflow-hidden hidden sm:block">
+                            <div className="w-16 h-1.5 bg-[var(--bg-base)] rounded-full overflow-hidden hidden sm:block">
                               <div className="h-full bg-[var(--accent-teal)] rounded-full" style={{ width: `${p.coverage_pct}%` }} />
                             </div>
                           </div>
@@ -255,7 +255,7 @@ export const PatternFailAnalysis = () => {
                         </td>
                         <td className="py-3.5 px-5 text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">{p.domain}</td>
                         <td className="py-3.5 px-5">
-                          <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${p.fail_rate_pct > 10 ? 'bg-[var(--accent-red)]/10 text-[var(--accent-red)]' : 'bg-[#6C63FF]/10 text-[#6C63FF]'}`}>
+                          <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${p.fail_rate_pct > 10 ? 'bg-[var(--accent-red)]/10 text-[var(--accent-red)]' : 'bg-[var(--accent-primary)]/10 text-[var(--accent-primary)]'}`}>
                             {p.fail_rate_pct > 10 ? 'ANALYSE' : 'OPTIMIZE'}
                           </span>
                         </td>
@@ -268,7 +268,7 @@ export const PatternFailAnalysis = () => {
           </div>
 
           {/* Pagination */}
-          <div className="px-5 py-4 bg-black/20 border-t border-[var(--border)] flex items-center justify-between">
+          <div className="px-5 py-4 bg-[var(--bg-base)] border-t border-[var(--border)] flex items-center justify-between">
             <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest">
               Showing {patterns.length} of {totalItems} patterns
             </span>
@@ -276,14 +276,14 @@ export const PatternFailAnalysis = () => {
               <button 
                 disabled={page === 1}
                 onClick={() => setPage(p => Math.max(1, p - 1))}
-                className="px-3 py-1 rounded bg-white/5 border border-[var(--border)] text-xs font-bold text-[var(--text-secondary)] disabled:opacity-30 hover:bg-white/10 hover:text-white transition-colors"
+                className="px-3 py-1 rounded bg-white/5 border border-[var(--border)] text-xs font-bold text-[var(--text-secondary)] disabled:opacity-30 hover:bg-white/10 hover:text-[var(--text-primary)] transition-colors"
               >
                 Prev
               </button>
               <button 
                 disabled={page * page_size >= totalItems}
                 onClick={() => setPage(p => p + 1)}
-                className="px-3 py-1 rounded bg-white/5 border border-[var(--border)] text-xs font-bold text-[var(--text-secondary)] disabled:opacity-30 hover:bg-white/10 hover:text-white transition-colors"
+                className="px-3 py-1 rounded bg-white/5 border border-[var(--border)] text-xs font-bold text-[var(--text-secondary)] disabled:opacity-30 hover:bg-white/10 hover:text-[var(--text-primary)] transition-colors"
               >
                 Next
               </button>
@@ -292,7 +292,7 @@ export const PatternFailAnalysis = () => {
         </div>
 
         {/* Forensics Analysis Panel */}
-        <div className="bg-[var(--bg-card)] rounded-2xl border border-[var(--border)] p-6 shadow-2xl relative min-h-[380px] flex flex-col justify-between">
+        <div className="bg-[var(--bg-card)] rounded-[var(--radius-lg)] border border-[var(--border)] p-6 shadow-2xl relative min-h-[380px] flex flex-col justify-between">
           {!selectedPatternId ? (
             <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
               <Sparkles className="w-8 h-8 text-[var(--text-muted)] mb-3 animate-pulse" />
@@ -309,8 +309,8 @@ export const PatternFailAnalysis = () => {
               <div className="space-y-4">
                 <div className="flex items-center justify-between border-b border-[var(--border)] pb-3">
                   <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-[#6C63FF]" />
-                    <span className="font-bold text-sm text-white">AI Diagnostics: {selectedPatternId}</span>
+                    <Sparkles className="w-4 h-4 text-[var(--accent-primary)]" />
+                    <span className="font-bold text-sm text-[var(--text-primary)]">AI Diagnostics: {selectedPatternId}</span>
                   </div>
                   <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[var(--accent-red)]/10 text-[var(--accent-red)] uppercase">
                     {analysisRes?.fault_class || 'TRANSITION'}
@@ -320,12 +320,12 @@ export const PatternFailAnalysis = () => {
                 <div className="space-y-3">
                   <div>
                     <span className="text-[10px] text-[var(--text-secondary)] font-bold uppercase tracking-wider block">Detected Root Cause</span>
-                    <p className="text-xs text-white font-medium mt-0.5">{analysisRes?.root_cause || 'Transition delay defect in scan flip-flop chain 14'}</p>
+                    <p className="text-xs text-[var(--text-primary)] font-medium mt-0.5">{analysisRes?.root_cause || 'Transition delay defect in scan flip-flop chain 14'}</p>
                   </div>
 
                   <div>
                     <span className="text-[10px] text-[var(--text-secondary)] font-bold uppercase tracking-wider block">Failure Mode</span>
-                    <p className="text-xs font-mono text-[var(--accent-red)] mt-0.5 bg-black/20 p-2 rounded border border-[var(--border)]">{analysisRes?.failure_mode || 'Slow-to-rise timing violation'}</p>
+                    <p className="text-xs font-mono text-[var(--accent-red)] mt-0.5 bg-[var(--bg-base)] p-2 rounded border border-[var(--border)]">{analysisRes?.failure_mode || 'Slow-to-rise timing violation'}</p>
                   </div>
 
                   <div>
@@ -337,7 +337,7 @@ export const PatternFailAnalysis = () => {
                         'Enable 64x EDT compression'
                       ]).map((rec: string, idx: number) => (
                         <li key={idx} className="flex items-start gap-2 text-xs text-[var(--text-primary)]">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#6C63FF] shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[var(--accent-primary)] shrink-0 mt-0.5" />
                           <span>{rec}</span>
                         </li>
                       ))}
@@ -349,7 +349,7 @@ export const PatternFailAnalysis = () => {
               <div className="pt-4 border-t border-[var(--border)]">
                 <button
                   onClick={() => sendPrompt(`Run deep-dive root cause forensics for pattern ${selectedPatternId} and check scan flip-flop chain path delay`)}
-                  className="w-full px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#6C63FF] to-[#00D9FF] text-white font-bold text-xs transition-opacity hover:opacity-90 flex items-center justify-center gap-1.5 shadow-lg"
+                  className="w-full px-4 py-2.5 rounded-xl bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-cyan)] text-white font-bold text-xs transition-opacity hover:opacity-90 flex items-center justify-center gap-1.5 shadow-lg"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                   Analyse {selectedPatternId} ↗

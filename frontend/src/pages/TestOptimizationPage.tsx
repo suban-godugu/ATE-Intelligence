@@ -52,7 +52,7 @@ export const TestOptimizationPage = () => {
               )
             }
             style={({ isActive }) => isActive
-              ? { background: 'var(--accent-cyan)', boxShadow: '0 0 12px rgba(0,200,215,0.25)' }
+              ? { background: 'var(--accent-primary)', boxShadow: 'var(--shadow-glow-primary)' }
               : {}
             }
           >

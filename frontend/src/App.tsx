@@ -1,5 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { PageWrapper } from '@/components/layout/PageWrapper';
+import { ToastContainer } from '@/components/ui/ToastContainer';
+import { LoginPage } from '@/pages/LoginPage';
 import { DashboardPage } from '@/pages/DashboardPage';
 import { PatternsPage } from '@/pages/PatternsPage';
 import { PatternOverview } from '@/pages/patterns/PatternOverview';
@@ -19,6 +21,7 @@ import { CompressionTunerTab } from '@/pages/optimization/CompressionTunerTab';
 import { YieldPredictorTab } from '@/pages/optimization/YieldPredictorTab';
 import { SavingsDashboardTab } from '@/pages/optimization/SavingsDashboardTab';
 import { CostIntelligencePage } from '@/pages/CostIntelligencePage';
+import { EquipmentPage } from '@/pages/EquipmentPage';
 
 // Coming Soon — polished placeholder for unbuilt modules
 const ComingSoon = ({ title, description }: { title: string; description?: string }) => (
@@ -67,7 +70,10 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => (
 
 const App = () => {
   return (
+    <>
+    <ToastContainer />
     <Routes>
+      <Route path="/login" element={<LoginPage />} />
 
       {/* Protected Routes */}
       <Route
@@ -152,7 +158,7 @@ const App = () => {
         path="/equipment"
         element={
           <ProtectedRoute>
-            <AppLayout><ComingSoon title="Equipment" description="ATE tester health, utilisation, and scheduled maintenance tracking." /></AppLayout>
+            <AppLayout><EquipmentPage /></AppLayout>
           </ProtectedRoute>
         }
       />
@@ -187,6 +193,7 @@ const App = () => {
       {/* Fallback */}
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
+    </>
   );
 };
 

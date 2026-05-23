@@ -23,7 +23,7 @@ export const DieCorrelation = () => {
       {/* 4 KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {kpis.map((kpi) => (
-          <div key={kpi.label} className="bg-[#1E2A3B] rounded-2xl border border-white/5 p-5 flex items-center gap-4">
+          <div key={kpi.label} className="bg-[var(--bg-card)] rounded-2xl border border-[var(--border)] p-5 flex items-center gap-4">
             <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0" style={{ background: `${kpi.color}15` }}>
               <kpi.icon className="w-6 h-6" style={{ color: kpi.color }} />
             </div>
@@ -37,7 +37,7 @@ export const DieCorrelation = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Spatial Fail Distribution */}
-        <div className="lg:col-span-2 bg-[#1E2A3B] rounded-2xl border border-white/5 p-6 flex flex-col">
+        <div className="lg:col-span-2 bg-[var(--bg-card)] rounded-2xl border border-[var(--border)] p-6 flex flex-col">
           <div className="flex items-center justify-between mb-8">
             <div>
               <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400">Spatial Fail Distribution</h3>
@@ -48,7 +48,7 @@ export const DieCorrelation = () => {
         </div>
 
         {/* Yield Correlation List */}
-        <div className="bg-[#1E2A3B] rounded-2xl border border-white/5 p-6 flex flex-col">
+        <div className="bg-[var(--bg-card)] rounded-2xl border border-[var(--border)] p-6 flex flex-col">
           <div className="flex items-center justify-between mb-8">
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400">Yield Correlation (r)</h3>
             <span className="text-[10px] text-slate-500 font-bold uppercase">Pearson Method</span>

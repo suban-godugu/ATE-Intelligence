@@ -4,6 +4,8 @@ import { FileText, Play, CheckCircle2, AlertCircle, Trash2, Upload, X } from 'lu
 import { PageHeader } from '@/components/ui/PageHeader';
 import { useFilterStore } from '@/stores/useFilterStore';
 import apiClient from '@/api/client';
+import { uploadProgressUrl } from '@/api/config';
+import { toast } from '@/hooks/useToast';
 
 interface FileUploadState {
   file: File | null;
@@ -123,27 +125,30 @@ const UploadCard: React.FC<UploadCardProps> = ({
 };
 
 // ─── Progress Step ───────────────────────────────────────────────
-const ProgressStep = ({ event, index }: { event: ProgressEvent; index: number }) => {
+const ProgressStep = ({ event, index, total }: { event: ProgressEvent; index: number; total: number }) => {
   const isError    = event.stage === 'Error';
   const isComplete = event.stage === 'Complete';
+  const isActive   = index === total - 1;
 
   return (
     <div className="flex items-start gap-3 animate-fade-in">
       {/* Timeline connector */}
-      <div className="flex flex-col items-center shrink-0">
+      <div className="flex flex-col items-center shrink-0 h-full min-h-[48px]">
         <div
           className={`w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 transition-colors ${
             isError    ? 'border-[var(--accent-red)] bg-[rgba(239,68,68,0.1)]' :
             isComplete ? 'border-[var(--accent-teal)] bg-[rgba(16,185,129,0.1)]' :
-                         'border-[var(--accent-primary)] bg-[rgba(108,99,255,0.1)]'
+            isActive   ? 'border-[var(--accent-primary)] bg-[rgba(108,99,255,0.1)]' :
+                         'border-[var(--accent-teal)]/40 bg-[rgba(16,185,129,0.04)]'
           }`}
         >
           {isError    ? <AlertCircle  className="w-3 h-3 text-[var(--accent-red)]" /> :
            isComplete ? <CheckCircle2 className="w-3 h-3 text-[var(--accent-teal)]" /> :
-                        <div className="w-3 h-3 border-2 border-[var(--accent-primary)] border-t-transparent rounded-full animate-spin" />
+           isActive   ? <div className="w-2.5 h-2.5 border-2 border-[var(--accent-primary)] border-t-transparent rounded-full animate-spin" /> :
+                        <CheckCircle2 className="w-3 h-3 text-[var(--accent-teal)]/60" />
           }
         </div>
-        {index !== undefined && (
+        {index < total - 1 && (
           <div className="w-px flex-1 bg-[var(--border)] mt-1 min-h-[16px]" />
         )}
       </div>
@@ -239,8 +244,11 @@ export const UploadPage: React.FC = () => {
 
     try {
       const { data } = await apiClient.post('/upload', formData);
-      const uploadId = data.uploadId;
-      const eventSource = new EventSource(`http://localhost:4000/api/upload/progress/${uploadId}`);
+      const uploadId = data.uploadId ?? data.data?.uploadId;
+      if (!uploadId) {
+        throw new Error('No upload id returned from server');
+      }
+      const eventSource = new EventSource(uploadProgressUrl(uploadId));
 
       eventSource.onmessage = (e) => {
         const newEvents: ProgressEvent[] = JSON.parse(e.data);
@@ -262,8 +270,9 @@ export const UploadPage: React.FC = () => {
         eventSource.close();
         setIsAnalyzing(false);
       };
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Upload failed:', error);
+      toast.error('Upload failed', 'Check that the API is running and files are valid.');
       setIsAnalyzing(false);
     }
   };
@@ -387,7 +396,7 @@ export const UploadPage: React.FC = () => {
           </div>
           <div className="px-5 py-4 space-y-0">
             {progress.map((event, i) => (
-              <ProgressStep key={i} event={event} index={i} />
+              <ProgressStep key={i} event={event} index={i} total={progress.length} />
             ))}
           </div>
         </div>

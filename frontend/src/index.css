@@ -45,6 +45,10 @@
     --topbar-height: 56px;
     --content-pad: 28px;
 
+    /* Transitions */
+    --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-med: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
     /* Radii */
     --radius-xs: 4px;
     --radius-sm: 6px;
@@ -432,6 +436,58 @@
   .table-row-hover:hover {
     background: rgba(255, 255, 255, 0.018);
   }
+
+  /* ── Page Layout ── */
+  .page-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* ── Filter Select ── */
+  .filter-select {
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 6px 12px;
+    font-size: 12px;
+    color: var(--text-primary);
+    outline: none;
+    cursor: pointer;
+    transition: border-color var(--transition-fast);
+  }
+
+  .filter-select:hover {
+    border-color: var(--border-hover);
+  }
+
+  .filter-select:focus {
+    border-color: var(--accent-primary);
+  }
+
+  /* ── Data Table ── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+
+  .data-table th {
+    padding: 10px 14px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+    letter-spacing: 0.05em;
+  }
+
+  .data-table td {
+    padding: 12px 14px;
+    font-size: 13px;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border);
+  }
 }
 
 /* ─── Animations ─────────────────────────────────────────────── */
@@ -586,4 +642,27 @@ select option {
   outline: 2px solid rgba(108, 99, 255, 0.5);
   outline-offset: 2px;
   border-radius: var(--radius-sm);
+}
+
+/* ─── Responsive layout ─────────────────────────────────────── */
+@media (min-width: 768px) {
+  :root {
+    --content-pad: 28px;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --content-pad: 32px;
+  }
+}
+
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-scroll table {
+  min-width: 640px;
 }

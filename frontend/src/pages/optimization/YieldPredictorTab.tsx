@@ -72,7 +72,7 @@ export const YieldPredictorTab = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         
         {/* Card: Current Predicted Yield */}
-        <div className="bg-[#1E2A3B] border border-white/5 rounded-xl p-6 flex flex-col justify-between">
+        <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded-xl p-6 flex flex-col justify-between">
           <div>
             <span className="text-xs text-slate-400 font-medium">Projected Yield</span>
             <div className="text-4xl font-bold text-white mt-2">
@@ -86,7 +86,7 @@ export const YieldPredictorTab = () => {
         </div>
 
         {/* Card: Yield Delta Opportunity */}
-        <div className="bg-[#1E2A3B] border border-white/5 rounded-xl p-6 flex flex-col justify-between">
+        <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded-xl p-6 flex flex-col justify-between">
           <div>
             <span className="text-xs text-slate-400 font-medium">Estimated Net Gain</span>
             <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-ate-cyan mt-2">
@@ -100,7 +100,7 @@ export const YieldPredictorTab = () => {
         </div>
 
         {/* Card: Model Confidence */}
-        <div className="bg-[#1E2A3B] border border-white/5 rounded-xl p-6 flex flex-col justify-between">
+        <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded-xl p-6 flex flex-col justify-between">
           <div>
             <span className="text-xs text-slate-400 font-medium">AI Predictor Confidence</span>
             <div className="text-4xl font-bold text-purple-400 mt-2">
@@ -119,7 +119,7 @@ export const YieldPredictorTab = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Coverage Threshold Sliders */}
-        <div className="bg-[#1E2A3B] rounded-xl border border-white/5 p-6 space-y-8 flex flex-col justify-between">
+        <div className="bg-[var(--bg-card)] rounded-xl border border-[var(--border)] p-6 space-y-8 flex flex-col justify-between">
           <div>
             <h3 className="text-lg font-semibold text-white flex items-center gap-2 mb-2">
               <Target className="w-5 h-5 text-ate-violet" />
@@ -169,7 +169,7 @@ export const YieldPredictorTab = () => {
             </div>
           </div>
 
-          <div className="mt-8 p-4 bg-black/30 rounded-xl border border-white/5 space-y-3 relative overflow-hidden">
+          <div className="mt-8 p-4 bg-black/30 rounded-xl border border-[var(--border)] space-y-3 relative overflow-hidden">
             <div className="absolute right-0 bottom-0 translate-x-3 translate-y-3 opacity-5">
               <Sparkles className="w-16 h-16 text-ate-yellow" />
             </div>
@@ -188,7 +188,7 @@ export const YieldPredictorTab = () => {
         </div>
 
         {/* Prediction Table */}
-        <div className="lg:col-span-2 bg-[#1E2A3B] rounded-xl border border-white/5 p-6 flex flex-col">
+        <div className="lg:col-span-2 bg-[var(--bg-card)] rounded-xl border border-[var(--border)] p-6 flex flex-col">
           <h3 className="text-lg font-semibold text-white mb-2 flex items-center gap-2">
             <TrendingUp className="w-5 h-5 text-green-400" />
             Predicted Yield by Fab Site
@@ -205,7 +205,7 @@ export const YieldPredictorTab = () => {
                   <th className="p-4">Delta Opportunity</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-[var(--border)]">
                 {fabs.map((f: any, i: number) => (
                   <tr key={i} className="hover:bg-white/5 transition-colors">
                     <td className="p-4 font-semibold text-white">{f.fab}</td>

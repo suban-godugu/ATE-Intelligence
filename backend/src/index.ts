@@ -27,6 +27,7 @@ import exportRoutes from './routes/export.routes';
 import filterRoutes from './routes/filter.routes';
 import costIntelligenceRoutes from './routes/costIntelligence.routes';
 import headlessRoutes from './routes/headless.routes';   // ← Headless AI API v1
+import equipmentRoutes from './routes/equipment.routes';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -90,6 +91,7 @@ app.use('/api/filters', filterRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/lots/:lotId/export', exportRoutes);
 app.use('/api/cost', costIntelligenceRoutes);
+app.use('/api/equipment', equipmentRoutes);
 
 // --- Fallback aliases for frontend calling without /api prefix ---
 // These match the existing routes but are mounted at the root level.
@@ -111,6 +113,7 @@ app.use('/filters', filterRoutes);
 app.use('/upload', uploadRoutes);
 app.use('/lots/:lotId/export', exportRoutes);
 app.use('/cost', costIntelligenceRoutes);
+app.use('/equipment', equipmentRoutes);
 
 // ─── Headless AI API Gateway (/api/v1/) ────────────────────────────────────
 // API-First endpoints for external systems, AI agents, MES/ERP, chatbots.

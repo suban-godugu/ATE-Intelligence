@@ -8,8 +8,8 @@ const FlowList = ({ title, patterns, isOptimized = false }: { title: string, pat
       <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500">{title}</h3>
       <span className="text-[10px] font-mono text-slate-600">{patterns?.length || 0} Patterns</span>
     </div>
-    <div className="bg-[#1E2A3B] rounded-2xl border border-white/5 overflow-hidden flex-1 max-h-[600px] scrollbar-thin">
-      <div className="divide-y divide-white/5">
+    <div className="bg-[var(--bg-card)] rounded-2xl border border-[var(--border)] overflow-hidden flex-1 max-h-[600px] scrollbar-thin">
+      <div className="divide-y divide-[var(--border)]">
         {patterns?.map((p, idx) => (
           <div key={p.id} className="p-4 hover:bg-white/[0.02] transition-colors group relative">
             <div className="flex items-start justify-between gap-4">
@@ -62,7 +62,7 @@ export const PatternOrdering = () => {
 
         {/* Transition Icon */}
         <div className="flex lg:flex-col items-center justify-center gap-4 py-8 lg:py-0">
-          <div className="w-12 h-12 rounded-full bg-[#1E2A3B] border border-white/5 flex items-center justify-center shadow-2xl">
+          <div className="w-12 h-12 rounded-full bg-[var(--bg-card)] border border-[var(--border)] flex items-center justify-center shadow-2xl">
             <ArrowRight className="w-6 h-6 text-ate-cyan lg:rotate-0 rotate-90" />
           </div>
           <div className="flex flex-col items-center gap-1">
@@ -80,7 +80,7 @@ export const PatternOrdering = () => {
       </div>
 
       {/* Savings Summary & Action */}
-      <div className="bg-[#1E2A3B] rounded-2xl border border-ate-cyan/20 p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl shadow-ate-cyan/5">
+      <div className="bg-[var(--bg-card)] rounded-2xl border border-ate-cyan/20 p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl shadow-ate-cyan/5">
         <div className="flex flex-wrap gap-8">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-xl bg-ate-emerald/10 flex items-center justify-center">

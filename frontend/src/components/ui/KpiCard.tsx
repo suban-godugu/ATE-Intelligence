@@ -1,6 +1,6 @@
 import { ArrowUp, ArrowDown, type LucideIcon } from 'lucide-react';
 import { cn } from '@/utils';
-import { LineChart, Line, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, ResponsiveContainer } from 'recharts';
 
 interface Props {
   label: string;
@@ -13,6 +13,7 @@ interface Props {
   color: string;
   isInverse?: boolean;
   className?: string;
+  alignPopover?: 'left' | 'right';
 }
 
 export const KpiCard = ({
@@ -26,8 +27,10 @@ export const KpiCard = ({
   color,
   isInverse = false,
   className,
+  alignPopover = 'right',
 }: Props) => {
   const isImprovement = isInverse ? delta < 0 : delta > 0;
+  const gradientId = `grad-${label.replace(/[^a-zA-Z0-9]/g, '')}`;
 
   return (
     <div
@@ -63,7 +66,11 @@ export const KpiCard = ({
       </div>
 
       {/* Value */}
-      <div className="pl-1 text-[24px] font-bold text-[var(--text-primary)] leading-none mono-value flex-1">
+      <div
+        key={String(value)}
+        className="pl-1 text-[24px] font-bold text-[var(--text-primary)] leading-none mono-value flex-1 animate-fade-in"
+        style={{ animationDuration: '0.3s' }}
+      >
         {value}
       </div>
 
@@ -86,18 +93,25 @@ export const KpiCard = ({
         </div>
 
         {sparklineData && sparklineData.length > 0 && (
-          <div className="h-9 w-full opacity-50 group-hover:opacity-100 transition-opacity">
+          <div className="h-9 w-full opacity-55 group-hover:opacity-100 transition-opacity">
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={sparklineData}>
-                <Line
+              <AreaChart data={sparklineData} margin={{ top: 2, right: 2, left: 2, bottom: 2 }}>
+                <defs>
+                  <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor={color} stopOpacity={0.3} />
+                    <stop offset="100%" stopColor={color} stopOpacity={0.0} />
+                  </linearGradient>
+                </defs>
+                <Area
                   type="monotone"
                   dataKey="value"
                   stroke={color}
-                  strokeWidth={2}
+                  strokeWidth={1.5}
+                  fill={`url(#${gradientId})`}
                   dot={false}
                   isAnimationActive={false}
                 />
-              </LineChart>
+              </AreaChart>
             </ResponsiveContainer>
           </div>
         )}
@@ -106,8 +120,12 @@ export const KpiCard = ({
       {/* Breakdown popover on hover */}
       {breakdown && breakdown.length > 0 && (
         <div
-          className="absolute left-full top-0 ml-3 z-50 bg-[var(--bg-sidebar)] border border-[var(--border)] p-4 rounded-[var(--radius-lg)] shadow-[var(--shadow-overlay)] w-52 transition-all duration-150
-            opacity-0 group-hover:opacity-100 pointer-events-none translate-x-[-6px] group-hover:translate-x-0"
+          className={cn(
+            'absolute top-0 z-50 bg-[var(--bg-sidebar)] border border-[var(--border)] p-4 rounded-[var(--radius-lg)] shadow-[var(--shadow-overlay)] w-52 transition-all duration-150 opacity-0 group-hover:opacity-100 pointer-events-none',
+            alignPopover === 'left'
+              ? 'right-full mr-3 translate-x-[6px] group-hover:translate-x-0'
+              : 'left-full ml-3 translate-x-[-6px] group-hover:translate-x-0'
+          )}
         >
           <h4 className="text-[9px] font-bold text-[var(--text-muted)] uppercase tracking-widest mb-3 pb-2 border-b border-[var(--border)]">
             Breakdown

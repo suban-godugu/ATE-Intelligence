@@ -6,7 +6,7 @@ import { useFilterStore } from '@/stores/useFilterStore';
 
 // ─── Shared KPI card ─────────────────────────────────────────────────────────
 const KpiCard = ({ label, value, icon: Icon, color }: any) => (
-  <div className="bg-[#1E2A3B] rounded-2xl border border-white/5 p-4 flex flex-col justify-between h-28">
+  <div className="bg-[var(--bg-card)] rounded-2xl border border-[var(--border)] p-4 flex flex-col justify-between h-28">
     <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: `${color}18` }}>
       <Icon className="w-4 h-4" style={{ color }} />
     </div>
@@ -50,13 +50,13 @@ export const BISTView = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-[#1E2A3B] rounded-2xl border border-white/5 p-6 flex flex-col justify-between">
+        <div className="bg-[var(--bg-card)] rounded-2xl border border-[var(--border)] p-6 flex flex-col justify-between">
           <div className="mb-4">
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400">MBIST Overview</h3>
           </div>
           <MBISTChart data={mbRuns} isLoading={mbLoading} isEmpty={!mbRuns?.length} height={240} />
         </div>
-        <div className="bg-[#1E2A3B] rounded-2xl border border-white/5 p-6 flex flex-col justify-between">
+        <div className="bg-[var(--bg-card)] rounded-2xl border border-[var(--border)] p-6 flex flex-col justify-between">
           <div className="mb-4">
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400">LBIST Overview</h3>
           </div>

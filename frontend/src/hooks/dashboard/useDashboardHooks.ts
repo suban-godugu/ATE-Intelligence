@@ -11,7 +11,8 @@ export const useDashboardKpis = () => {
         params: { fabId, testerId, productId, lotId, startDate, endDate }
       });
       return data.data;
-    }
+    },
+    retry: 1,
   });
 };
 

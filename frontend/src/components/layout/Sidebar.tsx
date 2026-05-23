@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import {
   Home,
   Upload,
@@ -18,6 +18,9 @@ import {
 import { useAppStore } from '@/hooks/useAppStore';
 import { useFilterStore } from '@/stores/useFilterStore';
 import { useFilterOptions } from '@/api/hooks';
+import apiClient from '@/api/client';
+import { toast } from '@/hooks/useToast';
+import { useQueryClient } from '@tanstack/react-query';
 import { cn } from '@/utils';
 
 interface NavItem {
@@ -70,6 +73,8 @@ export const Sidebar = () => {
   const toggle = useAppStore(s => s.toggleSidebar);
   const filters = useFilterStore();
   const { data: options } = useFilterOptions();
+  const queryClient = useQueryClient();
+  const { pathname } = useLocation();
 
   return (
     <aside
@@ -91,84 +96,104 @@ export const Sidebar = () => {
 
       {/* Nav */}
       <nav className="flex-1 px-2 py-3 space-y-4 overflow-y-auto scrollbar-thin">
-        {navGroups.map((group) => (
-          <div key={group.label}>
-            {/* Section label */}
-            {!collapsed && (
-              <div className="px-2 mb-1">
-                <span className="text-[9px] font-bold text-[var(--text-muted)] uppercase tracking-[0.18em]">
-                  {group.label}
-                </span>
-              </div>
-            )}
+        {navGroups.map((group) => {
+          const isGroupActive = group.items.some(
+            (item) => pathname === item.path || (item.path !== '/' && pathname.startsWith(item.path))
+          );
 
-            <div className="space-y-0.5">
-              {group.items.map((item) => (
-                <NavLink
-                  key={item.path}
-                  to={item.path}
-                  title={collapsed ? item.label : undefined}
-                  className={({ isActive }) =>
-                    cn(
-                      'flex items-center gap-2.5 px-2.5 py-2 rounded-[var(--radius-sm)] transition-all duration-150 relative group text-[13px] font-medium',
-                      isActive
-                        ? 'bg-[var(--accent-primary)]/10 text-white'
-                        : 'text-[var(--text-secondary)] hover:bg-white/[0.04] hover:text-[var(--text-primary)]'
-                    )
-                  }
-                >
-                  {({ isActive }) => (
-                    <>
-                      {/* Active indicator bar */}
-                      {isActive && (
-                        <span
-                          className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 rounded-r-full"
-                          style={{
-                            background: 'linear-gradient(to bottom, var(--accent-primary), rgba(108,99,255,0.3))',
-                            boxShadow: '0 0 6px rgba(108,99,255,0.5)',
-                          }}
-                        />
-                      )}
-
-                      <item.icon
-                        className={cn(
-                          'w-4 h-4 shrink-0 transition-colors',
-                          isActive
-                            ? 'text-[var(--accent-primary)]'
-                            : 'text-[var(--text-muted)] group-hover:text-[var(--text-secondary)]'
-                        )}
-                      />
-
-                      {!collapsed && (
-                        <span className={cn(
-                          'truncate transition-all',
-                          isActive ? 'translate-x-0.5' : ''
-                        )}>
-                          {item.label}
-                        </span>
-                      )}
-
-                      {item.badge && !collapsed && (
-                        <span
-                          className="ml-auto badge badge-danger text-[8px] px-1.5 py-0.5"
-                        >
-                          {item.badge}
-                        </span>
-                      )}
-
-                      {/* Collapsed tooltip stub (title attr handles it) */}
-                    </>
+          return (
+            <div key={group.label}>
+              {/* Section label */}
+              {!collapsed && (
+                <div className="px-2 mb-1 flex items-center justify-between">
+                  <span
+                    className={cn(
+                      'text-[9px] font-bold uppercase tracking-[0.18em] transition-colors',
+                      isGroupActive ? 'text-[var(--accent-primary)] font-extrabold' : 'text-[var(--text-muted)]'
+                    )}
+                  >
+                    {group.label}
+                  </span>
+                  {isGroupActive && (
+                    <span className="w-1 h-1 rounded-full bg-[var(--accent-primary)] animate-pulse shadow-[0_0_8px_var(--accent-primary)]" />
                   )}
-                </NavLink>
-              ))}
-            </div>
+                </div>
+              )}
 
-            {/* Section divider (not after last group) */}
-            {!collapsed && navGroups.indexOf(group) < navGroups.length - 1 && (
-              <div className="divider mt-3" />
-            )}
-          </div>
-        ))}
+              <div className="space-y-0.5">
+                {group.items.map((item) => (
+                  <NavLink
+                    key={item.path}
+                    to={item.path}
+                    className={({ isActive }) =>
+                      cn(
+                        'flex items-center gap-2.5 px-2.5 py-2 rounded-[var(--radius-sm)] transition-all duration-150 relative group text-[13px] font-medium',
+                        isActive
+                          ? 'bg-[var(--accent-primary)]/10 text-white'
+                          : 'text-[var(--text-secondary)] hover:bg-white/[0.04] hover:text-[var(--text-primary)]'
+                      )
+                    }
+                  >
+                    {({ isActive }) => (
+                      <>
+                        {/* Active indicator bar */}
+                        {isActive && (
+                          <span
+                            className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 rounded-r-full"
+                            style={{
+                              background: 'linear-gradient(to bottom, var(--accent-primary), rgba(108,99,255,0.3))',
+                              boxShadow: '0 0 6px rgba(108,99,255,0.5)',
+                            }}
+                          />
+                        )}
+
+                        <item.icon
+                          className={cn(
+                            'w-4 h-4 shrink-0 transition-colors',
+                            isActive
+                              ? 'text-[var(--accent-primary)]'
+                              : 'text-[var(--text-muted)] group-hover:text-[var(--text-secondary)]'
+                          )}
+                        />
+
+                        {!collapsed && (
+                          <span className={cn(
+                            'truncate transition-all',
+                            isActive ? 'translate-x-0.5' : ''
+                          )}>
+                            {item.label}
+                          </span>
+                        )}
+
+                        {item.badge && !collapsed && (
+                          <span
+                            className="ml-auto badge badge-danger text-[8px] px-1.5 py-0.5"
+                          >
+                            {item.badge}
+                          </span>
+                        )}
+
+                        {/* Collapsed tooltip */}
+                        {collapsed && (
+                          <div className="absolute left-12 pl-2 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-150 z-50">
+                            <div className="bg-[var(--bg-sidebar)] border border-[var(--border)] text-white text-[11px] font-semibold px-2 py-1 rounded-[var(--radius-sm)] shadow-[var(--shadow-card)] whitespace-nowrap">
+                              {item.label}
+                            </div>
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </NavLink>
+                ))}
+              </div>
+
+              {/* Section divider (not after last group) */}
+              {!collapsed && navGroups.indexOf(group) < navGroups.length - 1 && (
+                <div className="divider mt-3" />
+              )}
+            </div>
+          );
+        })}
 
         {/* ── Quick Filters ─────────────────────────────── */}
         {!collapsed && (
@@ -220,11 +245,12 @@ export const Sidebar = () => {
             <button
               onClick={async () => {
                 try {
-                  await fetch(`${import.meta.env.VITE_API_URL}/filters/reset`, { method: 'POST' });
+                  await apiClient.post('/filters/reset');
                   filters.reset();
-                  window.location.reload();
+                  await queryClient.invalidateQueries();
+                  toast.success('Filters reset', 'Dashboard data refreshed.');
                 } catch {
-                  console.error('Failed to reset filters');
+                  toast.error('Reset failed', 'Could not reset filters on the server.');
                 }
               }}
               className="w-full flex items-center justify-center gap-1.5 py-1.5 text-[11px] font-semibold text-[var(--text-muted)] hover:text-[var(--accent-primary)] transition-colors group rounded-[var(--radius-sm)] hover:bg-white/[0.03]"

@@ -61,7 +61,7 @@ export const CompressionTunerTab = () => {
   return (
     <div className="space-y-6 animate-slide-in">
       {/* Top Banner Recommendation */}
-      <div className="bg-[#1E2A3B] border border-white/5 rounded-xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded-xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <div className="p-2.5 bg-ate-violet/10 rounded-lg text-ate-violet">
             <Sparkles className="w-5 h-5" />
@@ -87,7 +87,7 @@ export const CompressionTunerTab = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         
         {/* Tuner Interface */}
-        <div className="bg-[#1E2A3B] rounded-xl border border-white/5 p-6 flex flex-col justify-between min-h-[500px]">
+        <div className="bg-[var(--bg-card)] rounded-xl border border-[var(--border)] p-6 flex flex-col justify-between min-h-[500px]">
           <div>
             <h3 className="text-lg font-semibold text-white mb-2 flex items-center gap-2">
               <Cpu className="w-5 h-5 text-ate-cyan" />
@@ -103,7 +103,7 @@ export const CompressionTunerTab = () => {
                   className={`p-4 rounded-xl border-2 transition-all flex flex-col items-center justify-center gap-2 ${
                     ratio === r 
                       ? 'bg-ate-cyan/10 border-ate-cyan text-ate-cyan scale-105 shadow-md shadow-ate-cyan/5' 
-                      : 'bg-black/40 border-white/5 text-slate-400 hover:border-white/20'
+                      : 'bg-black/40 border-[var(--border)] text-slate-400 hover:border-white/20'
                   }`}
                 >
                   <span className="text-2xl font-bold">{r}x</span>
@@ -113,7 +113,7 @@ export const CompressionTunerTab = () => {
             </div>
 
             {/* Live Prediction Block */}
-            <div className="bg-black/30 rounded-xl p-5 border border-white/5 relative min-h-[140px] flex flex-col justify-center">
+            <div className="bg-black/30 rounded-xl p-5 border border-[var(--border)] relative min-h-[140px] flex flex-col justify-center">
               {isPreviewLoading ? (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-xl">
                   <RefreshCcw className="w-5 h-5 animate-spin text-ate-cyan" />
@@ -181,7 +181,7 @@ export const CompressionTunerTab = () => {
         </div>
 
         {/* Chain Health Summary */}
-        <div className="bg-[#1E2A3B] rounded-xl border border-white/5 p-6 flex flex-col min-h-[500px]">
+        <div className="bg-[var(--bg-card)] rounded-xl border border-[var(--border)] p-6 flex flex-col min-h-[500px]">
           <div className="mb-6 flex justify-between items-center">
             <div>
               <h3 className="text-lg font-semibold text-white flex items-center gap-2">
@@ -202,7 +202,7 @@ export const CompressionTunerTab = () => {
                   <th className="p-3">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-[var(--border)]">
                 {(tunerData?.chains || []).map((c: any) => (
                   <tr key={c.id} className="hover:bg-white/5 transition-colors">
                     <td className="p-3 font-mono text-white font-semibold">{c.id}</td>

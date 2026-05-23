@@ -79,28 +79,28 @@ export const PatternPruningTab = () => {
     <div className="space-y-6 animate-slide-in">
       {/* Overview Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-[#1E2A3B] rounded-xl border border-white/5 p-4 flex flex-col justify-between">
+        <div className="bg-[var(--bg-card)] rounded-xl border border-[var(--border)] p-4 flex flex-col justify-between">
           <span className="text-xs text-slate-400 font-medium">Redundant Patterns Found</span>
           <div className="flex items-baseline gap-2 mt-2">
             <span className="text-2xl font-bold text-white">{data?.redundant_count || 0}</span>
             <span className="text-xs text-slate-500">out of 1,284</span>
           </div>
         </div>
-        <div className="bg-[#1E2A3B] rounded-xl border border-white/5 p-4 flex flex-col justify-between">
+        <div className="bg-[var(--bg-card)] rounded-xl border border-[var(--border)] p-4 flex flex-col justify-between">
           <span className="text-xs text-slate-400 font-medium">Safe to Remove</span>
           <div className="flex items-baseline gap-2 mt-2">
             <span className="text-2xl font-bold text-green-400">{data?.safe_to_remove || 0}</span>
             <span className="text-xs text-slate-500">zero coverage loss</span>
           </div>
         </div>
-        <div className="bg-[#1E2A3B] rounded-xl border border-white/5 p-4 flex flex-col justify-between">
+        <div className="bg-[var(--bg-card)] rounded-xl border border-[var(--border)] p-4 flex flex-col justify-between">
           <span className="text-xs text-slate-400 font-medium">Avg Overlap Ratio</span>
           <div className="flex items-baseline gap-2 mt-2">
             <span className="text-2xl font-bold text-ate-yellow">{data?.avg_overlap_pct || 84.6}%</span>
             <span className="text-xs text-slate-500">high signature overlap</span>
           </div>
         </div>
-        <div className="bg-[#1E2A3B] rounded-xl border border-white/5 p-4 flex flex-col justify-between">
+        <div className="bg-[var(--bg-card)] rounded-xl border border-[var(--border)] p-4 flex flex-col justify-between">
           <span className="text-xs text-slate-400 font-medium">Potential Storage Freed</span>
           <div className="flex items-baseline gap-2 mt-2">
             <span className="text-2xl font-bold text-purple-400">{data?.data_reduction_gb || 3.2} GB</span>
@@ -112,7 +112,7 @@ export const PatternPruningTab = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Pruning Table */}
-        <div className="lg:col-span-2 bg-[#1E2A3B] rounded-xl border border-white/5 p-6 flex flex-col">
+        <div className="lg:col-span-2 bg-[var(--bg-card)] rounded-xl border border-[var(--border)] p-6 flex flex-col">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div>
               <h3 className="text-lg font-semibold text-white">Redundancy Candidates</h3>
@@ -126,7 +126,7 @@ export const PatternPruningTab = () => {
                   placeholder="Search pattern..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-9 pr-4 py-2 text-xs bg-black/30 border border-white/5 rounded-lg text-white focus:outline-none focus:border-ate-cyan/50 w-44 transition-all"
+                  className="pl-9 pr-4 py-2 text-xs bg-black/30 border border-[var(--border)] rounded-lg text-white focus:outline-none focus:border-ate-cyan/50 w-44 transition-all"
                 />
               </div>
               <button
@@ -165,7 +165,7 @@ export const PatternPruningTab = () => {
                   <th className="p-4">AI Confidence</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-[var(--border)]">
                 {filteredCandidates.map((c: any) => (
                   <tr 
                     key={c.pattern_a} 
@@ -227,24 +227,24 @@ export const PatternPruningTab = () => {
         <div className="space-y-6">
           
           {/* Coverage Simulation Preview */}
-          <div className="bg-gradient-to-b from-[#1E2A3B] to-[#1E2A3B]/50 border border-white/5 rounded-xl p-6">
+          <div className="bg-gradient-to-b from-[var(--bg-card)] to-[var(--bg-card)]/50 border border-[var(--border)] rounded-xl p-6">
             <h3 className="text-white font-medium mb-4 flex items-center gap-2">
               <ShieldAlert className="w-5 h-5 text-ate-violet" />
               Coverage Impact Simulator
             </h3>
             
             <div className="space-y-4">
-              <div className="flex justify-between items-center pb-3 border-b border-white/5">
+              <div className="flex justify-between items-center pb-3 border-b border-[var(--border)]">
                 <span className="text-slate-400 text-sm">Selected Patterns</span>
                 <span className="text-white font-mono text-md font-bold">{selected.length} items</span>
               </div>
-              <div className="flex justify-between items-center pb-3 border-b border-white/5">
+              <div className="flex justify-between items-center pb-3 border-b border-[var(--border)]">
                 <span className="text-slate-400 text-sm">Current Database Coverage</span>
                 <span className="text-white font-mono text-md font-bold">94.71%</span>
               </div>
               
               {simulationResult ? (
-                <div className="bg-black/30 rounded-lg p-3 border border-white/5 space-y-2 animate-fade-in">
+                <div className="bg-black/30 rounded-lg p-3 border border-[var(--border)] space-y-2 animate-fade-in">
                   <div className="flex justify-between items-center text-xs">
                     <span className="text-slate-400">Post-Pruning Coverage:</span>
                     <span className="text-green-400 font-mono font-semibold">{simulationResult.after_coverage_pct}%</span>
@@ -253,7 +253,7 @@ export const PatternPruningTab = () => {
                     <span className="text-slate-400">Net Coverage Loss:</span>
                     <span className="text-green-400 font-mono font-semibold">{simulationResult.delta_pct}%</span>
                   </div>
-                  <div className="flex justify-between items-center text-xs border-t border-white/5 pt-1.5 mt-1.5">
+                  <div className="flex justify-between items-center text-xs border-t border-[var(--border)] pt-1.5 mt-1.5">
                     <span className="text-slate-400">Rollback Security Token:</span>
                     <span className="text-ate-yellow font-mono font-bold select-all bg-white/5 px-1 py-0.5 rounded">{simulationResult.rollback_token}</span>
                   </div>
@@ -280,7 +280,7 @@ export const PatternPruningTab = () => {
           </div>
 
           {/* ROI Card */}
-          <div className="bg-[#1E2A3B] border border-white/5 rounded-xl p-6 relative overflow-hidden">
+          <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded-xl p-6 relative overflow-hidden">
             <div className="absolute right-0 top-0 translate-x-4 -translate-y-4 opacity-5">
               <Sparkles className="w-32 h-32 text-green-400" />
             </div>

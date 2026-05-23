@@ -14,21 +14,21 @@ import { useState, type ReactNode, type ReactElement } from 'react';
  * Shell uses #6C63FF for nav active — brand is unified to that value.
  */
 const T = {
-  brand: '#6C63FF',
-  brandLight: 'rgba(108, 99, 255, 0.15)',
-  success: '#10B981',
-  successLight: 'rgba(16, 185, 129, 0.15)',
-  successBadge: '#10B981',
-  successBadgeLight: 'rgba(16, 185, 129, 0.15)',
-  warning: '#F59E0B',
-  warningLight: 'rgba(245, 158, 11, 0.15)',
-  danger: '#F43F5E',
-  dangerMid: '#F43F5E',
-  dangerLight: 'rgba(244, 63, 94, 0.15)',
-  info: '#00D9FF',
-  infoLight: 'rgba(0, 217, 255, 0.15)',
-  accentWarm: '#D85A30',
-  accentWarmLight: 'rgba(216, 90, 48, 0.15)',
+  brand: 'var(--accent-primary)',
+  brandLight: 'rgba(108, 99, 255, 0.12)',
+  success: 'var(--accent-teal)',
+  successLight: 'rgba(16, 185, 129, 0.12)',
+  successBadge: 'var(--accent-teal)',
+  successBadgeLight: 'rgba(16, 185, 129, 0.12)',
+  warning: 'var(--accent-amber)',
+  warningLight: 'rgba(245, 158, 11, 0.12)',
+  danger: 'var(--accent-red)',
+  dangerMid: 'var(--accent-red)',
+  dangerLight: 'rgba(239, 68, 68, 0.12)',
+  info: 'var(--accent-cyan)',
+  infoLight: 'rgba(0, 200, 215, 0.12)',
+  accentWarm: 'var(--accent-rose)',
+  accentWarmLight: 'rgba(244, 63, 94, 0.12)',
 } as const;
 
 /** Color tokens (aliases onto T — use these in components for one mapping) */
@@ -44,10 +44,10 @@ const C = {
 
 /** Design tokens */
 const S = {
-  bg: { primary: '#1E2A3B', secondary: '#131C2E', tertiary: 'transparent' },
-  border: '1px solid rgba(255, 255, 255, 0.08)',
-  radius: { md: '8px', lg: '12px' },
-  text: { primary: '#ffffff', secondary: '#94a3b8', success: '#10B981' },
+  bg: { primary: 'var(--bg-card)', secondary: 'var(--bg-base)', tertiary: 'transparent' },
+  border: '1px solid var(--border)',
+  radius: { md: 'var(--radius-md)', lg: 'var(--radius-lg)' },
+  text: { primary: 'var(--text-primary)', secondary: 'var(--text-secondary)', success: 'var(--accent-teal)' },
 } as const;
 
 type BadgeTone = 'green' | 'amber' | 'red' | 'blue' | 'purple' | 'teal';
@@ -193,14 +193,7 @@ function KpiCard({
 
 function KpiRow({ children }: { children: ReactNode }) {
   return (
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
-        gap: '10px',
-        marginBottom: '14px',
-      }}
-    >
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[10px] mb-[14px]">
       {children}
     </div>
   );
@@ -208,7 +201,7 @@ function KpiRow({ children }: { children: ReactNode }) {
 
 function Grid2({ children }: { children: ReactNode }) {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '11px', marginBottom: '11px' }}>{children}</div>
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-[11px] mb-[11px]">{children}</div>
   );
 }
 

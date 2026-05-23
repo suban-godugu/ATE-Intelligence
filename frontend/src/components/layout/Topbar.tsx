@@ -1,10 +1,23 @@
-import { Search, Bell, Menu, Activity } from 'lucide-react';
+import { Search, Bell, Menu, Activity, Settings } from 'lucide-react';
 import { useAppStore } from '@/hooks/useAppStore';
+import { useEffect, useRef } from 'react';
 
 const INITIALS = 'SG';
 
 export const Topbar = () => {
   const toggleSidebar = useAppStore(s => s.toggleSidebar);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   return (
     <header
@@ -72,6 +85,7 @@ export const Topbar = () => {
           />
           <input
             id="global-search"
+            ref={searchInputRef}
             type="text"
             aria-label="Search the platform"
             placeholder="Search patterns, lots, reports..."
@@ -106,7 +120,18 @@ export const Topbar = () => {
           className="p-2 text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-white/[0.04] rounded-[var(--radius-sm)] transition-colors relative"
         >
           <Bell className="w-4 h-4" />
-          {/* Badge only shown when > 0 */}
+          <span className="absolute top-1 right-1 w-3.5 h-3.5 bg-[var(--accent-red)] text-white text-[8px] font-bold rounded-full flex items-center justify-center border border-[var(--bg-base)]">
+            3
+          </span>
+        </button>
+
+        {/* Settings quick access */}
+        <button
+          id="settings-btn"
+          aria-label="Settings"
+          className="p-2 text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-white/[0.04] rounded-[var(--radius-sm)] transition-colors"
+        >
+          <Settings className="w-4 h-4" />
         </button>
 
         {/* Divider */}
@@ -116,6 +141,7 @@ export const Topbar = () => {
         <button
           id="user-avatar-btn"
           aria-label="User menu"
+          title="Subhan Godugu (SG)"
           className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-[11px] text-white transition-all hover:ring-2 hover:ring-[var(--accent-primary)]/50 shrink-0 select-none"
           style={{
             background: 'linear-gradient(135deg, #6C63FF 0%, #8B83FF 100%)',

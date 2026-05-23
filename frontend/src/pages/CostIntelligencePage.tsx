@@ -5,6 +5,7 @@ import {
   LayoutGrid, Sliders, TrendingUp, Sparkles, 
   Download, Coins 
 } from 'lucide-react';
+import apiClient from '@/api/client';
 
 export const CostIntelligencePage = () => {
   const [activeTab, setActiveTab] = useState('ov');
@@ -28,63 +29,101 @@ export const CostIntelligencePage = () => {
   });
 
   useEffect(() => {
-    // Fetch initial data
-    fetch('/api/cost/summary').then(res => res.json()).then(setSummary).catch(console.error);
-    fetch('/api/cost/trend').then(res => res.json()).then(setTrend).catch(console.error);
-    fetch('/api/cost/breakdown').then(res => res.json()).then(setBreakdown).catch(console.error);
-    fetch('/api/cost/heatmap').then(res => res.json()).then(setHeatmap).catch(console.error);
-    fetch('/api/cost/patterns').then(res => res.json()).then(setPatterns).catch(console.error);
+    // Fetch initial data using robust apiClient
+    apiClient.get('/cost/summary').then(res => setSummary(res.data)).catch(console.error);
+    apiClient.get('/cost/trend').then(res => setTrend(res.data)).catch(console.error);
+    apiClient.get('/cost/breakdown').then(res => setBreakdown(res.data)).catch(console.error);
+    apiClient.get('/cost/heatmap').then(res => setHeatmap(res.data)).catch(console.error);
+    apiClient.get('/cost/patterns').then(res => setPatterns(res.data)).catch(console.error);
   }, []);
 
   useEffect(() => {
-    // Re-simulate ROI when sliders change
-    fetch('/api/cost/simulate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        lotsPerMo: roiState.lots,
-        diesPerWafer: roiState.dies,
-        wafersPerLot: roiState.wafers,
-        ratePerSec: roiState.rate,
-        timeSavedMs: roiState.tsaved
-      })
-    }).then(res => res.json()).then(setRoiResult).catch(console.error);
+    // Re-simulate ROI when sliders change using robust apiClient
+    apiClient.post('/cost/simulate', {
+      lotsPerMo: roiState.lots,
+      diesPerWafer: roiState.dies,
+      wafersPerLot: roiState.wafers,
+      ratePerSec: roiState.rate,
+      timeSavedMs: roiState.tsaved
+    }).then(res => setRoiResult(res.data)).catch(console.error);
   }, [roiState]);
 
   const handleRoiChange = (key: string, val: number) => {
     setRoiState(prev => ({ ...prev, [key]: val }));
   };
 
-  const colMap = ['#EAF3DE','#C0DD97','#FAC775','#EF9F27','#E24B4A','#A32D2D','#791F1F','#501313'];
+  const colMap = [
+    'rgba(16, 185, 129, 0.08)',
+    'rgba(16, 185, 129, 0.22)',
+    'rgba(245, 158, 11, 0.15)',
+    'rgba(245, 158, 11, 0.32)',
+    'rgba(239, 68, 68, 0.2)',
+    'rgba(239, 68, 68, 0.45)',
+    'rgba(244, 63, 94, 0.65)',
+    'var(--accent-red)'
+  ];
 
   if (!summary) return <div className="p-8 text-center text-[var(--text-secondary)] animate-pulse">Loading Cost Intelligence...</div>;
 
   return (
-    <div className="ci-container animate-fade-in">
+    <div className="ci-container animate-fade-in space-y-5 pb-12">
       
-      {/* TOPBAR */}
-      <div className="ci-flex-between" style={{ marginBottom: 20 }}>
-        <div className="ci-flex-center">
-          <Coins style={{ width: 18, height: 18, color: '#534AB7' }} />
-          <div>
-            <div style={{ fontSize: 14, fontWeight: 500 }}>Cost intelligence</div>
-            <div style={{ fontSize: 11, color: 'var(--text-secondary)', marginTop: 2 }}>Semiconductor test cost analysis, breakdown, and ROI simulation</div>
+      {/* PAGE HEADER */}
+      <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
+        <div className="pl-4" style={{ borderLeft: '3px solid', borderImage: 'linear-gradient(to bottom, var(--accent-amber), transparent) 1' }}>
+          <div className="flex items-center gap-2 mb-1">
+            <Coins className="w-4 h-4" style={{ color: 'var(--accent-amber)' }} />
+            <h1
+              className="text-[20px] font-bold"
+              style={{ color: 'var(--text-primary)', letterSpacing: '-0.02em' }}
+            >
+              Cost Intelligence
+            </h1>
           </div>
+          <p className="text-[12px]" style={{ color: 'var(--text-secondary)' }}>
+            Semiconductor test cost analysis, breakdown, and ROI simulation
+          </p>
         </div>
-        <div className="ci-flex-center" style={{ gap: 7 }}>
+        <div className="flex items-center gap-2 shrink-0 flex-wrap">
           <select className="ci-sel"><option>All Fabs</option><option>Fab A</option><option>Fab B</option><option>Fab C</option></select>
           <select className="ci-sel"><option>Last 30 days</option><option>Last 7 days</option><option>Last 90 days</option></select>
-          <button className="ci-bs" style={{ padding: '4px 8px' }}><Download size={14} /></button>
+          <button className="ci-bs"><Download size={14} /> Export</button>
         </div>
       </div>
-      
-      {/* TABS */}
-      <div className="ci-tabs-wrapper">
-        <div className={`ci-tab ${activeTab==='ov'?'on':''}`} onClick={() => setActiveTab('ov')}><LayoutDashboard size={14}/> Overview</div>
-        <div className={`ci-tab ${activeTab==='cb'?'on':''}`} onClick={() => setActiveTab('cb')}><PieChart size={14}/> Cost Breakdown</div>
-        <div className={`ci-tab ${activeTab==='wh'?'on':''}`} onClick={() => setActiveTab('wh')}><LayoutGrid size={14}/> Wafer Heatmap</div>
-        <div className={`ci-tab ${activeTab==='pc'?'on':''}`} onClick={() => setActiveTab('pc')}><Sliders size={14}/> Pattern Cost</div>
-        <div className={`ci-tab ${activeTab==='roi'?'on':''}`} onClick={() => setActiveTab('roi')}><TrendingUp size={14}/> ROI Simulator</div>
+
+      {/* TABS — pill bar */}
+      <div
+        className="flex items-center gap-1 p-1 overflow-x-auto scrollbar-thin"
+        style={{
+          background: 'var(--bg-card)',
+          border: '1px solid var(--border)',
+          borderRadius: 'var(--radius-lg)',
+          width: 'fit-content',
+          maxWidth: '100%',
+        }}
+      >
+        {[
+          { id: 'ov',  label: 'Overview',       icon: LayoutDashboard },
+          { id: 'cb',  label: 'Cost Breakdown',  icon: PieChart },
+          { id: 'wh',  label: 'Wafer Heatmap',  icon: LayoutGrid },
+          { id: 'pc',  label: 'Pattern Cost',   icon: Sliders },
+          { id: 'roi', label: 'ROI Simulator',  icon: TrendingUp },
+        ].map(tab => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-[var(--radius-md)] text-[12px] font-semibold transition-all duration-150 whitespace-nowrap shrink-0"
+            style={activeTab === tab.id
+              ? { background: 'var(--accent-amber)', color: '#fff', boxShadow: '0 0 12px rgba(245,158,11,0.25)' }
+              : { color: 'var(--text-secondary)' }
+            }
+          >
+            <tab.icon
+              style={{ width: 14, height: 14, flexShrink: 0, color: activeTab === tab.id ? '#fff' : 'var(--text-muted)' }}
+            />
+            {tab.label}
+          </button>
+        ))}
       </div>
       
       {/* TAB 1: OVERVIEW */}

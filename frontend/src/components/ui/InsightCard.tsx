@@ -23,7 +23,7 @@ export const InsightCard = ({ variant, title, description, action, className }: 
 
   return (
     <div className={cn(
-      "bg-[#1E2A3B] rounded-xl border border-white/5 p-5 border-l-4 transition-all hover:bg-white/[0.03]",
+      "bg-[var(--bg-card)] rounded-xl border border-[var(--border)] p-5 border-l-4 transition-all hover:bg-white/[0.03]",
       color,
       className
     )}>
