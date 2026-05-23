@@ -18,6 +18,7 @@ import { PatternPruningTab } from '@/pages/optimization/PatternPruningTab';
 import { CompressionTunerTab } from '@/pages/optimization/CompressionTunerTab';
 import { YieldPredictorTab } from '@/pages/optimization/YieldPredictorTab';
 import { SavingsDashboardTab } from '@/pages/optimization/SavingsDashboardTab';
+import { CostIntelligencePage } from '@/pages/CostIntelligencePage';
 
 // Coming Soon — polished placeholder for unbuilt modules
 const ComingSoon = ({ title, description }: { title: string; description?: string }) => (
@@ -140,7 +141,7 @@ const App = () => {
         path="/cost-intelligence"
         element={
           <ProtectedRoute>
-            <AppLayout><ComingSoon title="Cost Intelligence" description="Full ATE cost breakdown, test-time monetisation, and ROI modelling — coming soon." /></AppLayout>
+            <AppLayout><CostIntelligencePage /></AppLayout>
           </ProtectedRoute>
         }
       />
