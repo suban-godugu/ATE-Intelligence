@@ -162,8 +162,8 @@ export async function mergeAndImport(
         });
       }
 
-      const xCoords = log.dies.map(d => d.dieX);
-      const yCoords = log.dies.map(d => d.dieY);
+      // const xCoords = log.dies.map(d => d.dieX);
+      // const yCoords = log.dies.map(d => d.dieY);
       const maxDist = Math.max(...log.dies.map(d => Math.sqrt(d.dieX ** 2 + d.dieY ** 2)), 1);
 
       // Batch create dies to optimize spatial queries

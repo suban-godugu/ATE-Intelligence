@@ -12,14 +12,7 @@ let stuckAtThreshold = 94;
 let transitionThreshold = 89;
 let iddqThreshold = 82;
 
-// Standard helper to wrap success response
-const sendSuccess = (res: Response, data: any, extra: any = {}) => {
-  return res.json({
-    success: true,
-    data,
-    ...extra
-  });
-};
+
 
 // ─── 5.1 Pattern Analysis — Endpoints ────────────────────────────────────────
 

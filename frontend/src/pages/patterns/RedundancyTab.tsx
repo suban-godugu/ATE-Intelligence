@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Repeat, Layers, Zap, CheckCircle2, AlertTriangle, Trash2 } from 'lucide-react';
 import { useSpecRedundancy, useRemoveRedundancyMutation } from '@/api/specHooks';
 
@@ -40,7 +40,7 @@ export const Redundancy = () => {
   const { data: specRedRes, isLoading } = useSpecRedundancy();
   const removeRedundancy = useRemoveRedundancyMutation();
 
-  const data = specRedRes || {
+  const data = useMemo(() => specRedRes || {
     redundant_count: 12,
     avg_overlap_pct: 84.6,
     potential_savings_ms: 320,
@@ -54,7 +54,7 @@ export const Redundancy = () => {
       { pattern_a: 'PT_055', pattern_b: 'PT_023', overlap_pct: 76, unique_vectors: 18, confidence_pct: 81, recommendation: 'REVIEW' },
       { pattern_a: 'PT_060', pattern_b: 'PT_031', overlap_pct: 71, unique_vectors: 24, confidence_pct: 78, recommendation: 'REVIEW' }
     ]
-  };
+  }, [specRedRes]);
 
   const [selectedPairs, setSelectedPairs] = useState<string[]>([]);
   const [selectedCell, setSelectedCell] = useState<{ a: string, b: string, overlap: number } | null>(null);

@@ -57,7 +57,7 @@ export const getKPIs = async (req: any, res: any, next: any) => {
 
 export const getKPITrend = async (req: any, res: any, next: any) => {
   try {
-    const { lotId, metric } = req.query;
+    const { metric } = req.query;
     
     // Get last 5 lots
     const recentLots = await prisma.lot.findMany({

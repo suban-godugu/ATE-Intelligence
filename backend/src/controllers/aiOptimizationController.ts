@@ -40,7 +40,7 @@ export const getPatterns = async (req: Request, res: Response, next: NextFunctio
 // Returns AI-recommended order and projected time savings
 export const optimizeFlow = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { patterns, currentOrder, objective } = req.body;
+    const { currentOrder, objective } = req.body;
     
     // Simulate AI inference time
     await new Promise(resolve => setTimeout(resolve, 800));
@@ -65,7 +65,7 @@ export const optimizeFlow = async (req: Request, res: Response, next: NextFuncti
 // Prompt 3 — Coverage -> yield predictor pipeline
 export const predictYield = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { coverageByClass, lotId, fabId } = req.body;
+    // const { coverageByClass, lotId, fabId } = req.body;
     
     await new Promise(resolve => setTimeout(resolve, 600));
 
@@ -92,7 +92,7 @@ export const predictYield = async (req: Request, res: Response, next: NextFuncti
 // Prompt 4 — MBIST/LBIST schedule optimizer
 export const optimizeSchedule = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { domains, currentSchedule } = req.body;
+    const { currentSchedule } = req.body;
     await new Promise(resolve => setTimeout(resolve, 700));
 
     return sendSuccess(res, {
@@ -109,7 +109,7 @@ export const optimizeSchedule = async (req: Request, res: Response, next: NextFu
 // Prompt 5 — Scan/Redundancy -> compression tuner
 export const optimizeCompression = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { currentRatio, targetRatio, chains } = req.body;
+    const { targetRatio } = req.body;
     await new Promise(resolve => setTimeout(resolve, 500));
 
     return sendSuccess(res, {
@@ -128,7 +128,7 @@ export const optimizeCompression = async (req: Request, res: Response, next: Nex
 // Wraps proposed changes and returns a rollback token
 export const simulateAction = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { actionType, payload } = req.body;
+    const { payload } = req.body;
     await new Promise(resolve => setTimeout(resolve, 1000));
 
     // In a real app, this would execute the ML pipeline in a sandbox
@@ -153,7 +153,7 @@ export const simulateAction = async (req: Request, res: Response, next: NextFunc
 // Prompt 8 — Savings dashboard aggregation
 export const getSavingsSummary = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { lotId } = req.query;
+    // const { lotId } = req.query;
 
     return sendSuccess(res, {
       counters: {
@@ -177,7 +177,7 @@ export const getSavingsSummary = async (req: Request, res: Response, next: NextF
 // Prompt 9 — Apply / Rollback action API
 export const applyOptimization = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { rollbackToken, action } = req.body; // action: 'APPLY' | 'ROLLBACK'
+    const { action } = req.body; // action: 'APPLY' | 'ROLLBACK'
     await new Promise(resolve => setTimeout(resolve, 800));
 
     return sendSuccess(res, {

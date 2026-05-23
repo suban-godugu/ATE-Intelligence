@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { ArrowDown, ArrowUp, Zap, Play, CheckCircle2, Shuffle, AlertCircle } from 'lucide-react';
 import { sendPrompt } from '@/utils/sendPrompt';
 import { 
@@ -12,13 +12,13 @@ export const FlowOptimizerTab = () => {
   const simulateFlow = useSimulateFlowOptimizerMutation();
   const applyFlow = useApplyFlowOptimizerMutation();
 
-  const flow = flowRes || {
+  const flow = useMemo(() => flowRes || {
     current_time_ms: 4820,
     optimized_time_ms: 2502,
     saving_pct: 48.1,
     current_order: ['ATPG stuck-at', 'ATPG transition', 'MBIST', 'LBIST', 'Scan chain'],
     recommended_order: ['MBIST', 'LBIST', 'ATPG stuck-at', 'Scan chain 64x', 'ATPG transition']
-  };
+  }, [flowRes]);
 
   const [objective, setObjective] = useState('time');
   const [currentOrder, setCurrentOrder] = useState<string[]>([]);
@@ -30,7 +30,7 @@ export const FlowOptimizerTab = () => {
       setCurrentOrder(flow.current_order);
       setRecommendedOrder(flow.recommended_order);
     }
-  }, [flowRes]);
+  }, [flow]);
 
   const handleMoveUp = (index: number) => {
     if (index === 0) return;

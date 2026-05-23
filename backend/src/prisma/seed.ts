@@ -54,7 +54,7 @@ async function main() {
   for (const item of distribution) {
     for (let i = 1; i <= item.count; i++) {
       const pId = `P${(seq + 101).toString()}`;
-      let data = {
+      const data: any = {
         patternId: pId,
         type: item.type,
         domain: i % 2 === 0 ? 'CPU Core' : 'GPU Block',

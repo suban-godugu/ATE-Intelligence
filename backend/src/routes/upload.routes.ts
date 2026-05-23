@@ -5,7 +5,7 @@ import { processFile } from '../services/modelSelector.service';
 import { mergeAndImport } from '../services/importService';
 import { progressStore } from '../utils/progressStore';
 import fs from 'fs';
-import path from 'path';
+
 import crypto from 'crypto';
 
 const router = Router();
