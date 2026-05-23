@@ -35,7 +35,12 @@ app.use(requestLogger);
 
 // 2. CORS
 app.use(cors({
-  origin: process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : ['http://localhost:5173', 'http://localhost:5174'],
+  origin: [
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "https://ate-intelligence-ui.vercel.app",
+    "https://ate-intelligence-dqig9663o-ate-intelligence-s-projects.vercel.app"
+  ],
   credentials: true
 }));
 
