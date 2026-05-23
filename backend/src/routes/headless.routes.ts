@@ -138,7 +138,7 @@ router.get('/data/lots/:lotId/kpis', async (req, res, next) => {
       }),
     ]);
     const passCount = await prisma.dieResult.count({ where: { waferRun: { lotId }, passed: true } });
-    const yieldPct  = dieStats._count.id > 0 ? (passCount / dieStats._count.id) * 100 : 0;
+    const yieldPct = dieStats._count.id > 0 ? (passCount / dieStats._count.id) * 100 : 0;
     return sendSuccess(res, {
       lotId,
       totalPatterns: patternCount,
@@ -167,7 +167,7 @@ router.get('/ai/savings-estimate/:lotId', async (req, res, next) => {
     const result = await optimizationEngine.detectRedundancy(lotId);
     return sendSuccess(res, {
       costReduction: `${(result.costSavedPerDie * 100).toFixed(2)}%`,
-      timeSavings:   `${result.timeSavedMs.toFixed(1)}ms`,
+      timeSavings: `${result.timeSavedMs.toFixed(1)}ms`,
       yieldImprovement: `${result.projectedYield.toFixed(2)}%`,
       patternsReduced: result.removableCount,
       totalSavings: `$${(result.costSavedPerDie * 1000).toFixed(0)}/lot`,

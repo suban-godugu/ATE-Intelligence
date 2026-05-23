@@ -1,8 +1,8 @@
 import { prisma } from '../prisma/client';
-import { 
-  STILReaderOutput, 
-  LogReaderOutput, 
-  MBISTReaderOutput, 
+import {
+  STILReaderOutput,
+  LogReaderOutput,
+  MBISTReaderOutput,
   LBISTReaderOutput,
   ATPGReaderOutput
 } from '@ate/ai-models';
@@ -35,11 +35,11 @@ export async function mergeAndImport(
 
   // 1. Check for Duplicate/Existing Lot
   if (fileHash) {
-    const existingLot = await prisma.lot.findFirst({ 
+    const existingLot = await prisma.lot.findFirst({
       where: { fileHash } as any,
       include: { _count: { select: { patterns: true } } }
     });
-    
+
     // If we have a healthy existing lot, don't duplicate the work
     if (existingLot && existingLot._count.patterns > 100) {
       return {

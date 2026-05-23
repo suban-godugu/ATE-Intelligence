@@ -8,12 +8,12 @@ async function main() {
 
   // 1. Full Reset
   const models = ['optimizationRun', 'lBISTRun', 'mBISTRun', 'scanChainRun', 'faultCoverage', 'scanChainPattern', 'dieResult', 'redundancyGroup', 'waferRun', 'scanChain', 'pattern', 'lot', 'user'];
-  for (const m of models) { 
-    try { 
-      await (prisma as any)[m].deleteMany(); 
+  for (const m of models) {
+    try {
+      await (prisma as any)[m].deleteMany();
     } catch (e) {
       console.warn(`Could not clear ${m}`);
-    } 
+    }
   }
 
   // 2. Users (Step 19)
@@ -101,14 +101,14 @@ async function main() {
     if (i === 11) { length = 0; status = 'BROKEN'; balance = 12.0; }
 
     await prisma.scanChain.create({
-      data: { 
-        chainId, 
-        length, 
-        domain: i < 7 ? 'CPU Core' : 'GPU', 
-        type: i === 7 ? 'EDT' : 'FULL', 
-        balancePercent: balance, 
-        status, 
-        lotId: lot.id 
+      data: {
+        chainId,
+        length,
+        domain: i < 7 ? 'CPU Core' : 'GPU',
+        type: i === 7 ? 'EDT' : 'FULL',
+        balancePercent: balance,
+        status,
+        lotId: lot.id
       }
     });
   }
@@ -128,7 +128,7 @@ async function main() {
       dieY: Math.floor(i / 20),
       passed,
       failPattern: passed ? null : 'P205',
-      testTimeMs: 42.6, 
+      testTimeMs: 42.6,
       binCode: passed ? '1' : '99',
       zone: i < 100 ? 'center' : (i < 200 ? 'mid-ring' : 'edge')
     });

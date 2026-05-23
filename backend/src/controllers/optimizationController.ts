@@ -5,7 +5,7 @@ const calculateOptimization = (params: any) => {
   const { maxCostPerWafer, yieldTarget, maxTestTimeMs } = params;
   void maxCostPerWafer;
   void maxTestTimeMs;
-  
+
   // Real logic should go here. For now, we return calculated results based on input.
   return {
     estimatedSavings: 0,
@@ -43,7 +43,7 @@ export const run = async (req: any, res: any, next: any) => {
         projectedYield: results.newYieldEstimate,
         patternsRemoved: results.patternsRemoved,
         totalSavingsUSD: results.estimatedSavings,
-        optimizedOrder: JSON.stringify([]), 
+        optimizedOrder: JSON.stringify([]),
         createdBy: userId
       }
     });

@@ -20,7 +20,7 @@ export const getPatterns = async (req: Request, res: Response, next: NextFunctio
   try {
     const page = parseInt(req.query.page as string || '1');
     const pageSize = parseInt(req.query.page_size as string || '5');
-    
+
     // Custom filter query inputs
     const typeFilter = req.query.type as string;
     const domainFilter = req.query.domain as string;
@@ -44,9 +44,9 @@ export const getPatterns = async (req: Request, res: Response, next: NextFunctio
     }
     if (searchFilter) {
       const q = searchFilter.toLowerCase();
-      filtered = filtered.filter(p => 
-        p.patternId.toLowerCase().includes(q) || 
-        p.domain.toLowerCase().includes(q) || 
+      filtered = filtered.filter(p =>
+        p.patternId.toLowerCase().includes(q) ||
+        p.domain.toLowerCase().includes(q) ||
         p.type.toLowerCase().includes(q)
       );
     }
@@ -210,9 +210,9 @@ export const removeRedundancy = async (req: Request, res: Response, next: NextFu
   try {
     const { pattern_ids } = req.body || { pattern_ids: [] };
     removedPatternsList = [...new Set([...removedPatternsList, ...pattern_ids])];
-    
+
     appliedOptimizationsCount += pattern_ids.length > 0 ? 1 : 0;
-    
+
     return res.json({
       removed: pattern_ids.length || 9,
       coverage_delta_pct: 0.00,
@@ -346,7 +346,7 @@ export const applyFlowOptimizer = async (req: Request, res: Response, next: Next
     currentObjective = objective || currentObjective;
     appliedOptimizationsCount += 1;
     pendingOptimizationsCount = Math.max(0, pendingOptimizationsCount - 1);
-    
+
     return res.json({
       applied: true,
       new_time_ms: 2502,
@@ -410,7 +410,7 @@ export const removePatternPruning = async (req: Request, res: Response, next: Ne
     removedPatternsList = [...new Set([...removedPatternsList, ...(pattern_ids || [])])];
     appliedOptimizationsCount += 1;
     pendingOptimizationsCount = Math.max(0, pendingOptimizationsCount - 1);
-    
+
     return res.json({
       removed: pattern_ids?.length || 9,
       time_saved_ms: 320,
@@ -466,7 +466,7 @@ export const applyCompression = async (req: Request, res: Response, next: NextFu
     currentEdtRatio = ratio || 64;
     appliedOptimizationsCount += 1;
     pendingOptimizationsCount = Math.max(0, pendingOptimizationsCount - 1);
-    
+
     return res.json({
       applied: true,
       new_scan_time_ms: ratio === 64 ? 1060 : 580,
