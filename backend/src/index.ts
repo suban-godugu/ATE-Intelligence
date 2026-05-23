@@ -36,13 +36,30 @@ const PORT = process.env.PORT || 4000;
 app.use(requestLogger);
 
 // 2. CORS
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "https://ate-intelligence-ui.vercel.app",
+  "https://ate-intelligence-dqig9663o-ate-intelligence-s-projects.vercel.app"
+];
+
+if (process.env.ALLOWED_ORIGINS) {
+  const envOrigins = process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim());
+  allowedOrigins.push(...envOrigins);
+}
+
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "http://localhost:5174",
-    "https://ate-intelligence-ui.vercel.app",
-    "https://ate-intelligence-dqig9663o-ate-intelligence-s-projects.vercel.app"
-  ],
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    if (
+      allowedOrigins.includes(origin) ||
+      origin.endsWith('.vercel.app') ||
+      process.env.NODE_ENV === 'development'
+    ) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
+  },
   credentials: true
 }));
 
